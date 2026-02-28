@@ -1,0 +1,322 @@
+/* ── Variables ──────────────────────────────────────────────────────── */
+:root {
+  --mapp-bg:      #eff6ff; --mapp-border:  #6366f1; --mapp-text:    #1e3a8a;
+  --rphs-bg:      #f0fdf4; --rphs-border:  #16a34a; --rphs-text:    #14532d;
+  --rpme-bg:      #fffbeb; --rpme-border:  #d97706; --rpme-text:    #78350f;
+}
+
+/* ── Base ───────────────────────────────────────────────────────────── */
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+/* ── Sticky band ─────────────────────────────────────────────────────── */
+
+.sticky-band {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #f1f5f9;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+}
+
+/* ── Header ─────────────────────────────────────────────────────────── */
+
+.conf-header {
+  background: #0f172a;
+  color: #fff;
+  padding: 1rem 0 1.4rem;
+}
+.conf-header h1 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+.conf-header .conf-meta {
+  color: #94a3b8;
+  font-size: 1rem;
+  margin-top: 0.3rem;
+}
+
+/* ── Tabs ────────────────────────────────────────────────────────────── */
+
+.nav-tabs {
+  border-bottom: none;
+  gap: 0.35rem;
+  padding-left: 0;
+  padding-top: 0;
+  padding-bottom: 0.5rem;
+  background: #f1f5f9;
+}
+.nav-tabs .nav-link {
+  border: none;
+  border-radius: 6px;
+  color: #64748b;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.5rem 1.35rem;
+  position: relative;
+  transition: background 0.15s, color 0.15s;
+}
+.nav-tabs .nav-link:hover {
+  color: #334155;
+  background: #e2e8f0;
+}
+.nav-tabs .nav-link.active {
+  background: #0f172a;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+}
+.nav-tabs .nav-link.active::after {
+  display: none;
+}
+
+/* ── Mobile day select ───────────────────────────────────────────────── */
+
+.day-select-mobile {
+  display: none;
+}
+.day-tabs-desktop  {
+  display: flex;
+}
+.track-legend {
+  display: none;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.legend-abbr {
+  font-weight: 700;
+}
+
+/* ── Track column headers ────────────────────────────────────────────── */
+
+.track-header-row {
+  display: grid;
+  grid-template-columns: 52px 1fr 1fr 1fr;
+  gap: 6px;
+  padding: 6px 0 12px;
+}
+
+/* The sticky one lives in .sticky-band; per-pane ones are hidden */
+.tab-pane .track-header-row {
+  display: none;
+}
+.track-col-hdr {
+  text-align: center;
+  padding: 0.6rem 0.25rem;
+  border-radius: 6px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+.track-abbr {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+.track-full-name {
+  font-size: 0.82rem;
+  font-weight: 400;
+  opacity: 0.88;
+  line-height: 1.2;
+}
+.track-col-hdr.mapp { background: var(--mapp-border); }
+.track-col-hdr.rphs { background: var(--rphs-border); }
+.track-col-hdr.rpme { background: var(--rpme-border); }
+
+/* ── Schedule grid ───────────────────────────────────────────────────── */
+
+.schedule-grid {
+  display: grid;
+  grid-template-columns: 52px 1fr 1fr 1fr;
+  column-gap: 6px;
+}
+
+/* ── Time labels ─────────────────────────────────────────────────────── */
+
+.time-lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-align: right;
+  padding-right: 6px;
+  padding-top: 2px;
+  user-select: none;
+  align-self: start;
+  grid-column: 1;
+}
+
+/* ── Base card ───────────────────────────────────────────────────────── */
+
+.sc {
+  border-radius: 7px;
+  padding: 7px 11px;
+  border-left: 3px solid transparent;
+  font-size: 0.92rem;
+  overflow: hidden;
+  margin: 1px;
+  align-self: stretch;
+  min-height: 0;
+  transition: box-shadow 0.15s;
+}
+.sc:hover {
+  box-shadow:
+  0 3px 12px rgba(0,0,0,0.1);
+}
+.sc-time  {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  opacity: 0.55;
+  margin-bottom: 2px;
+}
+.sc-title {
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 3px;
+}
+.sc-speaker {
+  font-size: 0.86rem;
+  opacity: 0.85;
+}
+.sc-affil {
+  font-size: 0.82rem;
+  opacity: 0.6;
+}
+.sc-joint-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 1px 7px;
+  border-radius: 3px;
+  margin-bottom: 4px;
+  background: rgba(0,0,0,0.07);
+}
+
+/* ── Highlight overlay ──────────────────────────────────────────────── */
+
+.sc-highlight {
+  background: #fefce8 !important;
+  color: #713f12 !important;
+  border-left-color: #ca8a04 !important;
+  border-left-width: 5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+.sc-highlight .sc-title::before {
+  content: "★ ";
+  font-size: 0.75em;
+  opacity: 0.6;
+}
+.sc-plen    { background: #fff;       border-left-color: #94a3b8; color: #1e293b; }
+.sc-break   { background: #f8fafc;    border-left-color: #cbd5e1; color: #475569; }
+.sc-adjourn { background: #f1f5f9;    border-left-color: #e2e8f0; color: #94a3b8; font-style: italic; }
+.sc-mapp    { background: var(--mapp-bg); border-left-color: var(--mapp-border); color: var(--mapp-text); }
+.sc-rphs    { background: var(--rphs-bg); border-left-color: var(--rphs-border); color: var(--rphs-text); }
+.sc-rpme    { background: var(--rpme-bg); border-left-color: var(--rpme-border); color: var(--rpme-text); }
+
+/* ── Session header strip ────────────────────────────────────────────── */
+
+.sess-hdr {
+  border-radius: 5px;
+  padding: 5px 11px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  margin: 1px;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+}
+.sess-title     { font-weight: 700; line-height: 1.3; }
+.sess-chair     { font-size: 0.78rem; opacity: 0.88; }
+.sess-hdr.mapp  { background: var(--mapp-border); color: #fff; }
+.sess-hdr.rphs  { background: var(--rphs-border); color: #fff; }
+.sess-hdr.rpme  { background: var(--rpme-border); color: #fff; }
+.sess-hdr.full  { background: #64748b; color: #fff; }
+
+/* ── Mobile ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .track-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0.4rem 0 0.75rem;
+    font-size: 0.95rem;
+    color: #475569;
+  }
+  .track-header-row {
+    display: none;
+  }
+  .nav-tabs {
+    padding-left: 0;
+  }
+  .day-label {
+    display: none;
+  }
+  .day-tabs-desktop {
+    display: none !important;
+  }
+  .day-select-mobile {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background: #0f172a;
+    border: none;
+    border-radius: 6px;
+    padding: 0.45rem 2rem 0.45rem 0.9rem;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.6rem center;
+    cursor: pointer;
+  }
+  .schedule-grid {
+    display: flex !important;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .time-lbl { display: none; }
+  .sc, .sess-hdr {
+    width: 100% !important;
+    grid-column: unset !important;
+    grid-row: unset !important;
+    margin: 0;
+    order: attr(data-order);
+  }
+
+  /* hide duplicate joint cards on mobile */
+  .joint-secondary {
+    display: none;
+  }
+
+  /* show track label as prefix on mobile */
+  .sc[data-mobile-track]::before {
+    content: attr(data-mobile-track);
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.6;
+    margin-bottom: 3px;
+  }
+}
