@@ -180,7 +180,6 @@ function buildDay(day, items) {
         const jointEl = document.createElement("div");
         jointEl.className = `sc sc-${t.toLowerCase()}${idx > 0 ? " joint-secondary" : ""}${item.Highlight === "yes" ? " sc-highlight" : ""}`;
         const partner = sortedJoints.filter(p => p !== t)[0];
-        jointEl.dataset.mobileTrack = `${track} (joint)`;
         jointEl.style.cssText = `${rowCSS} grid-column: ${TRACK_COL[t]};`;
         jointEl.style.order = mobileOrderMap.get(item);
         jointEl.innerHTML = cardInnerHTML(item, partner);
