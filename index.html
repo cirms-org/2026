@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CIRMS 2026 — Meeting Schedule</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    /* ── Variables ──────────────────────────────────────────────────────── */
+    :root {
+      --mapp-bg:      #eff6ff; --mapp-border:  #6366f1; --mapp-text:    #1e3a8a;
+      --rphs-bg:      #f0fdf4; --rphs-border:  #16a34a; --rphs-text:    #14532d;
+      --rpme-bg:      #fffbeb; --rpme-border:  #d97706; --rpme-text:    #78350f;
+
+    }
+
+    /* ── Base ───────────────────────────────────────────────────────────── */
+    body { font-family: 'DM Sans', sans-serif; background: #f1f5f9; color: #1e293b; }
+
+    /* ── Sticky band ─────────────────────────────────────────────────────── */
+    .sticky-band {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #f1f5f9;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    }
+
+    /* ── Header ─────────────────────────────────────────────────────────── */
+    .conf-header { background: #0f172a; color: #fff; padding: 1rem 0 1.4rem; }
+    .conf-header h1 { font-size: 2.2rem; font-weight: 600; letter-spacing: -0.03em; margin: 0; }
+    .conf-header .conf-meta { color: #94a3b8; font-size: 1rem; margin-top: 0.3rem; }
+
+    /* ── Tabs ────────────────────────────────────────────────────────────── */
+    .nav-tabs { border-bottom: none; gap: 0.35rem; padding-left: 0; padding-top: 0; padding-bottom: 0.5rem; background: #f1f5f9; }
+    .nav-tabs .nav-link {
+      border: none; border-radius: 6px; color: #64748b;
+      font-weight: 500; font-size: 1rem; padding: 0.5rem 1.35rem; position: relative;
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-tabs .nav-link:hover { color: #334155; background: #e2e8f0; }
+    .nav-tabs .nav-link.active {
+      background: #0f172a;
+      color: #fff;
+      font-weight: 600;
+      border: none;
+    }
+    .nav-tabs .nav-link.active::after { display: none; }
+
+    /* ── Mobile day select ───────────────────────────────────────────────── */
+    .day-select-mobile { display: none; }
+    .day-tabs-desktop  { display: flex; }
+    .track-legend { display: none; }
+    .legend-item { display: flex; align-items: center; gap: 0.4rem; }
+    .legend-swatch { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+    .legend-abbr { font-weight: 700; }
+
+    /* ── Track column headers ────────────────────────────────────────────── */
+    .track-header-row {
+      display: grid;
+      grid-template-columns: 52px 1fr 1fr 1fr;
+      gap: 6px; padding: 6px 0 12px;
+    }
+    /* The sticky one lives in .sticky-band; per-pane ones are hidden */
+    .tab-pane .track-header-row { display: none; }
+    .track-col-hdr {
+      text-align: center; padding: 0.6rem 0.25rem;
+      border-radius: 6px; color: #fff;
+      display: flex; flex-direction: column; align-items: center; gap: 0.25rem;
+    }
+    .track-abbr { font-size: 0.95rem; font-weight: 700; letter-spacing: 0.06em; }
+    .track-full-name { font-size: 0.82rem; font-weight: 400; opacity: 0.88; line-height: 1.2; }
+    .track-col-hdr.mapp { background: var(--mapp-border); }
+    .track-col-hdr.rphs { background: var(--rphs-border); }
+    .track-col-hdr.rpme { background: var(--rpme-border); }
+
+    /* ── Schedule grid ───────────────────────────────────────────────────── */
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: 52px 1fr 1fr 1fr;
+      column-gap: 6px;
+    }
+
+    /* ── Time labels ─────────────────────────────────────────────────────── */
+    .time-lbl {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem; color: #94a3b8;
+      text-align: right; padding-right: 6px; padding-top: 2px;
+      user-select: none; align-self: start;
+      grid-column: 1;
+    }
+
+    /* ── Base card ───────────────────────────────────────────────────────── */
+    .sc {
+      border-radius: 7px; padding: 7px 11px;
+      border-left: 3px solid transparent;
+      font-size: 0.92rem; overflow: hidden;
+      margin: 1px; align-self: stretch; min-height: 0;
+      transition: box-shadow 0.15s;
+    }
+    .sc:hover { box-shadow: 0 3px 12px rgba(0,0,0,0.1); }
+
+    .sc-time  { font-family: 'DM Mono', monospace; font-size: 0.75rem; opacity: 0.55; margin-bottom: 2px; }
+    .sc-title { font-weight: 600; line-height: 1.3; margin-bottom: 3px; }
+    .sc-speaker { font-size: 0.86rem; opacity: 0.85; }
+    .sc-affil   { font-size: 0.82rem; opacity: 0.6;  }
+    .sc-joint-badge {
+      display: inline-block; font-size: 0.72rem; font-weight: 600;
+      padding: 1px 7px; border-radius: 3px; margin-bottom: 4px;
+      background: rgba(0,0,0,0.07);
+    }
+
+    /* ── Highlight overlay (additive — works on any card type) ──────────── */
+    .sc-highlight {
+      background: #fefce8 !important;
+      color: #713f12 !important;
+      border-left-color: #ca8a04 !important;
+      border-left-width: 5px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .sc-highlight .sc-title::before {
+      content: "★ ";
+      font-size: 0.75em;
+      opacity: 0.6;
+    }
+    .sc-plen   { background: #fff;       border-left-color: #94a3b8; color: #1e293b; }
+    .sc-break  { background: #f8fafc;    border-left-color: #cbd5e1; color: #475569; }
+    .sc-adjourn{ background: #f1f5f9;    border-left-color: #e2e8f0; color: #94a3b8; font-style: italic; }
+    .sc-mapp   { background: var(--mapp-bg); border-left-color: var(--mapp-border); color: var(--mapp-text); }
+    .sc-rphs   { background: var(--rphs-bg); border-left-color: var(--rphs-border); color: var(--rphs-text); }
+    .sc-rpme   { background: var(--rpme-bg); border-left-color: var(--rpme-border); color: var(--rpme-text); }
+
+    /* ── Session header strip ────────────────────────────────────────────── */
+    .sess-hdr {
+      border-radius: 5px; padding: 5px 11px;
+      font-size: 0.82rem; font-weight: 500;
+      margin: 1px; align-self: stretch;
+      display: flex; flex-direction: column; justify-content: center; gap: 2px;
+    }
+    .sess-title { font-weight: 700; line-height: 1.3; }
+    .sess-chair { font-size: 0.78rem; opacity: 0.88; }
+    .sess-hdr.mapp  { background: var(--mapp-border); color: #fff; }
+    .sess-hdr.rphs  { background: var(--rphs-border); color: #fff; }
+    .sess-hdr.rpme  { background: var(--rpme-border); color: #fff; }
+
+    .sess-hdr.full  { background: #64748b; color: #fff; }
+
+    /* ── Mobile ──────────────────────────────────────────────────────────── */
+    @media (max-width: 767px) {
+      .track-legend { display: flex; flex-wrap: wrap; gap: 0.75rem; padding: 0.4rem 0 0.75rem; font-size: 0.95rem; color: #475569; }
+      .track-header-row { display: none; }
+      .nav-tabs { padding-left: 0; }
+      .day-label { display: none; }
+      .day-tabs-desktop { display: none !important; }
+      .day-select-mobile {
+        display: block;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 1rem; font-weight: 600;
+        color: #fff; background: #0f172a;
+        border: none; border-radius: 6px;
+        padding: 0.45rem 2rem 0.45rem 0.9rem;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.6rem center;
+        cursor: pointer;
+      }      .schedule-grid {
+        display: flex !important;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .time-lbl { display: none; }
+      .sc, .sess-hdr {
+        width: 100% !important;
+        grid-column: unset !important;
+        grid-row: unset !important;
+        margin: 0;
+        order: attr(data-order);
+      }
+      /* hide duplicate joint cards on mobile */
+      .joint-secondary { display: none; }
+      /* show track label as prefix on mobile */
+      .sc[data-mobile-track]::before {
+        content: attr(data-mobile-track);
+        display: block;
+        font-size: 0.75rem; font-weight: 700;
+        text-transform: uppercase; letter-spacing: 0.05em;
+        opacity: 0.6; margin-bottom: 3px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="sticky-band">
+  <header class="conf-header">
+    <div class="container">
+      <h1>CIRMS 2026 — Meeting Schedule</h1>
+      <p class="conf-meta mb-0">Council on Ionizing Radiation Measurements and Standards &nbsp;·&nbsp; Annual Meeting &nbsp;·&nbsp; April 13–15, 2026</p>
+    </div>
+  </header>
+  <div class="container">
+    <!-- Day tabs (desktop) + dropdown (mobile) -->
+    <div style="display:flex; align-items:center; gap:0.5rem; padding-top:0.75rem;">
+      <span class="day-label" style="width:55px; font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:#94a3b8; text-align:right; padding-right:6px; flex-shrink:0;">Day</span>
+      <ul class="nav nav-tabs mb-0 day-tabs-desktop" id="dayTabs" role="tablist" style="padding-left:0; padding-top:0;"></ul>
+      <select class="day-select-mobile" id="daySelect" aria-label="Select day"></select>
+    </div>
+    <!-- Permanent sticky track header (desktop) / legend (mobile) -->
+    <div class="track-header-row" id="stickyTrackHdr">
+      <div style="font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:#94a3b8; text-align:right; padding-right:6px; align-self:center;">Track</div>
+      <div class="track-col-hdr mapp"><span class="track-abbr">MApp</span><span class="track-full-name">Medical Applications</span></div>
+      <div class="track-col-hdr rphs"><span class="track-abbr">RPHS</span><span class="track-full-name">Radiation Protection &amp; Homeland Security</span></div>
+      <div class="track-col-hdr rpme"><span class="track-abbr">RPME</span><span class="track-full-name">Radiation Processing &amp; Material Effects</span></div>
+    </div>
+    <!-- Track legend (mobile only, inside sticky band) -->
+    <div class="track-legend">
+      <div class="legend-item">
+        <div class="legend-swatch" style="background:var(--mapp-border)"></div>
+        <span><span class="legend-abbr">MApp</span> — Medical Applications</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch" style="background:var(--rphs-border)"></div>
+        <span><span class="legend-abbr">RPHS</span> — Radiation Protection &amp; Homeland Security</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch" style="background:var(--rpme-border)"></div>
+        <span><span class="legend-abbr">RPME</span> — Radiation Processing &amp; Material Effects</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container py-3">
+
+  <!-- Schedule panes -->
+  <div class="tab-content" id="dayContents"></div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+// ── DATA ─────────────────────────────────────────────────────────────────────
+// Columns: Day, Track, Time, Duration, Event, Speaker, Affiliation
+// Emails and internal liaison columns intentionally omitted.
+
+// ── CONFIG ────────────────────────────────────────────────────────────────────
+
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │  SET USE_CSV = true WHEN DEPLOYING TO GITHUB PAGES                      │
+// │  Then you can delete the hardcoded DATA array above to keep it clean.   │
+// │  The CSV file must sit alongside index.html in the same folder.         │
+// └─────────────────────────────────────────────────────────────────────────┘
+const USE_CSV     = true;
+const CSV_FILE    = "schedule.csv";
+const FULL_TRACKS   = new Set(["Plen","Break","Start","Adjourn","End","Photo","Train","Food"]);
+const BASE_TRACKS   = ["MApp","RPHS","RPME"];
+const TRACK_COL     = { MApp:2, RPHS:3, RPME:4 };
+const DAY_LABELS    = { Mon:"Monday, Apr 13", Tue:"Tuesday, Apr 14", Wed:"Wednesday, Apr 15" };
+
+// joint track → CSS class = highest-priority track in pair (MApp > RPHS > RPME)
+const TRACK_PRIORITY = { MApp: 0, RPHS: 1, RPME: 2 };
+function jointClass(track) {
+  const parts = jointParts(track);
+  if (!parts) return null;
+  parts.sort((a, b) => TRACK_PRIORITY[a] - TRACK_PRIORITY[b]);
+  return parts[0].toLowerCase();
+}
+
+// ── HELPERS ───────────────────────────────────────────────────────────────────
+const toMin = t => { if(!t) return 0; const[h,m]=t.split(":").map(Number); return h*60+(m||0); };
+const parseDur = d => { if(!d||!d.trim()) return 30; const[h,m]=d.split(":").map(Number); return h*60+(m||0)||30; };
+const fmt = m => `${String(Math.floor(m/60)).padStart(2,"0")}:${String(m%60).padStart(2,"0")}`;
+const isChair   = item => /^session\s+\d+:/i.test(item.Event || "");
+
+function jointParts(track) {
+  if (!track.includes("-")) return null;
+  const parts = track.split("-");
+  if (parts.every(p => BASE_TRACKS.includes(p))) return parts;
+  return null;
+}
+
+function partnerBadgeStyle(partnerTrack) {
+  if (partnerTrack === "RPME") return `background:var(--rpme-border);color:#fff;`;
+  if (partnerTrack === "RPHS") return `background:var(--rphs-border);color:#fff;`;
+  if (partnerTrack === "MApp") return `background:var(--mapp-border);color:#fff;`;
+  return `background:rgba(0,0,0,0.1);color:inherit;`;
+}
+
+function cardInnerHTML(item, partnerTrack) {
+  const dur = parseDur(item.Dur);
+  const durStr = dur ? ` · ${dur} min` : "";
+  return `
+    ${partnerTrack ? `<div class="sc-joint-badge" style="${partnerBadgeStyle(partnerTrack)}">Joint with ${partnerTrack}</div>` : ""}
+    <div class="sc-time">${item.Time}${durStr}</div>
+    <div class="sc-title">${item.Event}</div>
+    ${item.Speaker ? `<div class="sc-speaker">${item.Speaker}${item.Affil ? ` &nbsp;·&nbsp; <span class="sc-affil">${item.Affil}</span>` : ""}</div>` : ""}
+  `;
+}
+
+// ── BUILD DAY ─────────────────────────────────────────────────────────────────
+function buildDay(day, items) {
+  const sorted = [...items].sort((a,b) => toMin(a.Time) - toMin(b.Time));
+
+  // Build sorted list of all unique time boundaries (start times + end times)
+  // Each becomes one grid row; height is auto (content-driven).
+  const timePoints = [...new Set([
+    ...sorted.map(i => toMin(i.Time)),
+    ...sorted.map(i => toMin(i.Time) + parseDur(i.Dur))
+  ])].sort((a,b) => a-b);
+
+  // Map from minute-value → 1-based grid row index
+  const rowOf = min => timePoints.indexOf(min) + 1;
+  const totalRows = timePoints.length;
+
+  // Wrapper pane
+  const pane = document.createElement("div");
+  pane.className = "tab-pane fade";
+  pane.id = `pane-${day}`;
+
+  // Track column headers
+  const hdr = document.createElement("div");
+  hdr.className = "track-header-row";
+  hdr.innerHTML = `
+    <div></div>
+    <div class="track-col-hdr mapp"><span class="track-abbr">MApp</span><span class="track-full-name">Medical Applications</span></div>
+    <div class="track-col-hdr rphs"><span class="track-abbr">RPHS</span><span class="track-full-name">Radiation Protection &amp; Homeland Security</span></div>
+    <div class="track-col-hdr rpme"><span class="track-abbr">RPME</span><span class="track-full-name">Radiation Processing &amp; Material Effects</span></div>
+  `;
+
+  // Grid — rows are auto height (elastic), one per time boundary
+  const grid = document.createElement("div");
+  grid.className = "schedule-grid";
+  grid.style.gridTemplateRows = `repeat(${totalRows}, auto)`;
+  grid.style.rowGap = "3px";
+
+  // Time labels: show only for actual start times of items
+  const shownTimes = new Set(sorted.map(i => toMin(i.Time)));
+  shownTimes.forEach(t => {
+    const lbl = document.createElement("div");
+    lbl.className = "time-lbl";
+    lbl.style.gridRow = `${rowOf(t)}`;
+    lbl.textContent = fmt(t);
+    grid.appendChild(lbl);
+  });
+
+  // ── Precompute mobile order: full-width items stay in time order,
+  // parallel blocks are grouped by track priority (MApp → RPHS → RPME)
+  // so each track's session runs as a continuous block on mobile.
+  function effectivePriority(track) {
+    if (FULL_TRACKS.has(track)) return -1;
+    const parts = jointParts(track);
+    if (parts) {
+      const p = [...parts].sort((a,b) => TRACK_PRIORITY[a] - TRACK_PRIORITY[b]);
+      return TRACK_PRIORITY[p[0]];
+    }
+    return TRACK_PRIORITY[track] ?? 99;
+  }
+
+  const mobileOrderMap = new Map();
+  let mobIdx = 0;
+  let i = 0;
+  while (i < sorted.length) {
+    const item = sorted[i];
+    if (FULL_TRACKS.has(item.Track)) {
+      mobileOrderMap.set(item, mobIdx++);
+      i++;
+    } else {
+      // Collect the entire parallel block (until next full-width item)
+      const block = [];
+      while (i < sorted.length && !FULL_TRACKS.has(sorted[i].Track)) {
+        block.push(sorted[i]);
+        i++;
+      }
+      // Sort block by track priority then by time
+      block.sort((a, b) => {
+        const pd = effectivePriority(a.Track) - effectivePriority(b.Track);
+        return pd !== 0 ? pd : toMin(a.Time) - toMin(b.Time);
+      });
+      block.forEach(it => mobileOrderMap.set(it, mobIdx++));
+    }
+  }
+
+  // Render items
+  sorted.forEach(item => {
+    const startMin  = toMin(item.Time);
+    const dur       = parseDur(item.Dur);
+    const endMin    = startMin + dur;
+    const rowStart  = rowOf(startMin);
+    const rowEnd    = rowOf(endMin);
+    const rowCSS    = `grid-row: ${rowStart} / ${rowEnd};`;
+
+    const track   = item.Track;
+    const isFull  = FULL_TRACKS.has(track);
+    const joints  = jointParts(track);
+    const chair   = isChair(item);
+    const isEnd   = track === "Adjourn" || track === "End" || track === "Start";
+
+    // ── Session header strip (chair rows)
+    if (chair) {
+      if (joints) {
+        // Duplicate one header per constituent track — first is primary, rest are secondary
+        const sorted = [...joints].sort((a,b) => TRACK_PRIORITY[a] - TRACK_PRIORITY[b]);
+        sorted.forEach((t, idx) => {
+          const hdrEl = document.createElement("div");
+          hdrEl.className = `sess-hdr ${t.toLowerCase()}${idx > 0 ? " joint-secondary" : ""}`;
+          hdrEl.style.cssText = `${rowCSS} grid-column: ${TRACK_COL[t]};`;
+          hdrEl.style.order = mobileOrderMap.get(item);
+          const text = item.Event.replace(/^session\s+\d+:\s*/i, "");
+          hdrEl.innerHTML = `<span class="sess-title">${text}</span>${item.Speaker ? `<span class="sess-chair">${item.Speaker}</span>` : ""}`;
+          grid.appendChild(hdrEl);
+        });
+      } else {
+        const jClass = isFull ? "full" : track.toLowerCase();
+        const colCSS = isFull ? "grid-column: 2 / -1;" : `grid-column: ${TRACK_COL[track]};`;
+        const hdrEl = document.createElement("div");
+        hdrEl.className = `sess-hdr ${jClass}`;
+        hdrEl.style.cssText = rowCSS + colCSS;
+        hdrEl.style.order = mobileOrderMap.get(item);
+        const text = item.Event.replace(/^session\s+\d+:\s*/i, "");
+        hdrEl.innerHTML = `<span class="sess-title">${text}</span>${item.Speaker ? `<span class="sess-chair">${item.Speaker}</span>` : ""}`;
+        grid.appendChild(hdrEl);
+      }
+      return;
+    }
+
+    // ── Full-width cards (Plen, Break, etc.)
+    if (isFull) {
+      const cls = isEnd ? "sc-adjourn"
+        : (track==="Break"||track==="Food"||track==="Start"||track==="Train"||track==="Photo") ? "sc-break"
+        : "sc-plen";
+      const mTrack = track==="Break" ? "Break" : "Plenary";
+      const highlight = item.Highlight === "yes";
+      const fullEl = document.createElement("div");
+      fullEl.className = `sc ${cls}${highlight ? " sc-highlight" : ""}`;
+      fullEl.dataset.mobileTrack = mTrack;
+      fullEl.style.cssText = `${rowCSS} grid-column: 2 / -1;`;
+      fullEl.style.order = mobileOrderMap.get(item);
+      fullEl.innerHTML = cardInnerHTML(item, null);
+      grid.appendChild(fullEl);
+      return;
+    }
+
+    // ── Joint track cards (duplicate per base track)
+    if (joints) {
+      const sortedJoints = [...joints].sort((a,b) => TRACK_PRIORITY[a] - TRACK_PRIORITY[b]);
+      sortedJoints.forEach((t, idx) => {
+        const jointEl = document.createElement("div");
+        jointEl.className = `sc sc-${t.toLowerCase()}${idx > 0 ? " joint-secondary" : ""}${item.Highlight === "yes" ? " sc-highlight" : ""}`;
+        const partner = sortedJoints.filter(p => p !== t)[0];
+        jointEl.dataset.mobileTrack = `${track} (joint)`;
+        jointEl.style.cssText = `${rowCSS} grid-column: ${TRACK_COL[t]};`;
+        jointEl.style.order = mobileOrderMap.get(item);
+        jointEl.innerHTML = cardInnerHTML(item, partner);
+        grid.appendChild(jointEl);
+      });
+      return;
+    }
+
+    // ── Single track card
+    const singleEl = document.createElement("div");
+    singleEl.className = `sc sc-${track.toLowerCase()}${item.Highlight === "yes" ? " sc-highlight" : ""}`;
+    singleEl.dataset.mobileTrack = track;
+    singleEl.style.cssText = `${rowCSS} grid-column: ${TRACK_COL[track]};`;
+    singleEl.style.order = mobileOrderMap.get(item);
+    singleEl.innerHTML = cardInnerHTML(item, null);
+    grid.appendChild(singleEl);
+  });
+
+  pane.appendChild(hdr);
+  pane.appendChild(grid);
+  return pane;
+}
+
+// ── CSV PARSER ────────────────────────────────────────────────────────────────
+function parseCSV(text) {
+  const lines = text.replace(/\r/g, "").split("\n").filter(l => l.trim());
+  // Parse header
+  const headers = splitCSVLine(lines[0]);
+  return lines.slice(1).map(line => {
+    const vals = splitCSVLine(line);
+    const row = {};
+    headers.forEach((h, i) => row[h.trim()] = (vals[i] || "").trim());
+    return {
+      Day:     row["Day"]    || "",
+      Track:   row["Track"]  || "",
+      Time:    row["Time"]   || "",
+      Dur:     row["Duration"] || "",
+      Event:   row["Title"] || row["Event"] || "",
+      Speaker: row["Speaker"] || "",
+      Highlight: row["Star"] && row["Star"].trim().toLowerCase() === "yes" ? "yes" : "",
+    };
+  }).filter(r => r.Day);
+}
+
+function splitCSVLine(line) {
+  // Handles quoted fields with commas inside
+  const result = [];
+  let cur = "", inQuote = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (ch === '"') { inQuote = !inQuote; }
+    else if (ch === ',' && !inQuote) { result.push(cur); cur = ""; }
+    else { cur += ch; }
+  }
+  result.push(cur);
+  return result;
+}
+
+// ── ASSEMBLE PAGE ─────────────────────────────────────────────────────────────
+function assemblePage(data) {
+  const DAYS = [...new Set(data.map(r => r.Day))].filter(Boolean);
+  const tabsEl     = document.getElementById("dayTabs");
+  const contentsEl = document.getElementById("dayContents");
+  const selectEl   = document.getElementById("daySelect");
+
+  DAYS.forEach((day, di) => {
+    const items = data.filter(r => r.Day === day);
+    const label = DAY_LABELS[day] || day;
+
+    // Tab button
+    const li = document.createElement("li");
+    li.className = "nav-item";
+    li.innerHTML = `<button class="nav-link ${di===0?"active":""}"
+      data-bs-toggle="tab" data-bs-target="#pane-${day}"
+      type="button" role="tab">${label}</button>`;
+    tabsEl.appendChild(li);
+
+    // Mobile select option
+    const opt = document.createElement("option");
+    opt.value = day;
+    opt.textContent = label;
+    selectEl.appendChild(opt);
+
+    // Day pane
+    const pane = buildDay(day, items);
+    if (di === 0) pane.classList.add("show","active");
+    contentsEl.appendChild(pane);
+  });
+
+  // Wire select → Bootstrap tab
+  selectEl.addEventListener("change", () => {
+    const btn = tabsEl.querySelector(`[data-bs-target="#pane-${selectEl.value}"]`);
+    if (btn) bootstrap.Tab.getOrCreateInstance(btn).show();
+  });
+
+  // Keep select in sync when tabs are clicked (e.g. on resize)
+  tabsEl.addEventListener("shown.bs.tab", e => {
+    const day = e.target.dataset.bsTarget?.replace("#pane-", "");
+    if (day) selectEl.value = day;
+  });
+}
+
+// ── ENTRY POINT ───────────────────────────────────────────────────────────────
+if (USE_CSV) {
+  fetch(CSV_FILE)
+    .then(r => {
+      if (!r.ok) throw new Error(`Could not load ${CSV_FILE}: ${r.status}`);
+      return r.text();
+    })
+    .then(text => assemblePage(parseCSV(text)))
+    .catch(err => {
+      document.getElementById("dayContents").innerHTML =
+        `<div class="alert alert-danger mt-3">
+          <strong>Could not load schedule.csv.</strong><br>${err.message}
+        </div>`;
+    });
+} else {
+  assemblePage(DATA);
+}
+
+</script>
+</body>
+</html>
