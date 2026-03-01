@@ -78,6 +78,24 @@ body {
 
 /* ── Mobile day select ───────────────────────────────────────────────── */
 
+.day-tabs-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+}
+.grid-row-label {
+  width: 52px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #94a3b8;
+  text-align: right;
+  padding-right: 6px;
+  flex-shrink: 0;
+  align-self: center;
+}
 .day-select-mobile {
   display: none;
 }
@@ -265,7 +283,7 @@ body {
   .track-header-row {
     display: none;
   }
-  .day-label {
+  .grid-row-label {
     display: none;
   }
   .day-tabs-desktop {
