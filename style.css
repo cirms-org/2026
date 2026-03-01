@@ -316,14 +316,29 @@ body {
     display: none;
   }
   .now-marker {
+    display: flex !important;
     width: 100% !important;
     grid-column: unset !important;
     grid-row: unset !important;
     margin: 0;
+    padding: 2px 0;
+    position: relative;
   }
   .now-marker::before {
-    width: auto;
-    padding-right: 8px;
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ef4444;
+    flex-shrink: 0;
+    padding: 0;
+  }
+  .now-marker::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background: #ef4444;
+    margin-left: -1px;
   }
   .day-tabs-desktop {
     display: none !important;
