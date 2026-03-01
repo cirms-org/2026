@@ -268,6 +268,35 @@ body {
 .sess-hdr.rpme  { background: var(--rpme-border); color: #fff; }
 .sess-hdr.full  { background: #64748b; color: #fff; }
 
+/* ── Now marker (current-time line) ──────────────────────────────────── */
+
+.now-marker {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  z-index: 10;
+}
+.now-marker::before {
+  content: attr(data-time);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #ef4444;
+  width: 52px;
+  text-align: right;
+  padding-right: 6px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+.now-marker::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: #ef4444;
+  border-radius: 1px;
+}
+
 /* ── Mobile ──────────────────────────────────────────────────────────── */
 
 @media (max-width: 767px) {
@@ -284,6 +313,9 @@ body {
     display: none;
   }
   .grid-row-label {
+    display: none;
+  }
+  .now-marker {
     display: none;
   }
   .day-tabs-desktop {

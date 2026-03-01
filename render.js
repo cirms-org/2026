@@ -20,10 +20,12 @@
 // ── Config ────────────────────────────────────────────────────────────────────
 
 const CSV_FILE    = "schedule.csv";
+const DEBUG_DAY   = "Mon";   // "Mon"/"Tue"/"Wed" to test now-marker with today's clock; null for production
 const FULL_TRACKS = new Set(["Plen","Break","Start","Adjourn","End","Photo","Train"]);
 const BASE_TRACKS = ["MApp","RPHS","RPME"];
 const TRACK_COL   = { MApp:2, RPHS:3, RPME:4 };   // grid columns (col 1 = time gutter)
 const DAY_LABELS  = { Mon:"Monday, April 13", Tue:"Tuesday, April 14", Wed:"Wednesday, April 15" };
+const DAY_DATES   = { Mon:"2026-04-13",      Tue:"2026-04-14",      Wed:"2026-04-15" };
 
 // joint track → CSS class = highest-priority track in pair (MApp > RPHS > RPME)
 const TRACK_PRIORITY = { MApp: 0, RPHS: 1, RPME: 2 };
@@ -41,6 +43,22 @@ const toMin = t => { if (!t) return 0; const [h, m] = t.split(":").map(Number); 
 const parseDur = d => { if (!d || !d.trim()) return 30; const [h, m] = d.split(":").map(Number); return h * 60 + (m || 0) || 30; };
 const fmt = m => `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
 const isChair = item => /^session\s+\d+:/i.test(item.Event || "");
+
+/** Current Eastern Time as { date: "YYYY-MM-DD", min: minutes-since-midnight } */
+function getET() {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    year: "numeric", month: "2-digit", day: "2-digit",
+    hour: "2-digit", minute: "2-digit", hour12: false
+  }).formatToParts(new Date());
+  const g = type => parts.find(p => p.type === type).value;
+  return {
+    date: DEBUG_DAY ? DAY_DATES[DEBUG_DAY] : `${g("year")}-${g("month")}-${g("day")}`,
+    min: parseInt(g("hour")) * 60 + parseInt(g("minute"))
+  };
+}
+
+let nowMarkerInfo = null;  // { el, timePoints } — at most one marker across all day panes
 
 function partnerBadgeStyle(partnerTrack) {
   if (partnerTrack === "RPME") return `background:var(--rpme-border);color:#fff;`;
@@ -69,6 +87,16 @@ function buildDay(day, items) {
     ...sorted.map(i => toMin(i.Time)),
     ...sorted.map(i => toMin(i.Time) + parseDur(i.Dur))
   ])].sort((a, b) => a - b);
+
+  // Inject current ET time as a grid row (if this day is today and time is in range)
+  const et = getET();
+  const nowMin = DAY_DATES[day] === et.date
+    && et.min >= timePoints[0] && et.min <= timePoints[timePoints.length - 1]
+    ? et.min : null;
+  if (nowMin !== null && !timePoints.includes(nowMin)) {
+    timePoints.push(nowMin);
+    timePoints.sort((a, b) => a - b);
+  }
 
   const rowOf = min => timePoints.indexOf(min) + 1;
   const totalRows = timePoints.length;
@@ -213,6 +241,16 @@ function buildDay(day, items) {
     grid.appendChild(singleEl);
   });
 
+  // Now-marker: red line showing current time
+  if (nowMin !== null) {
+    const marker = document.createElement("div");
+    marker.className = "now-marker";
+    marker.dataset.time = fmt(nowMin);
+    marker.style.gridRow = `${rowOf(nowMin)}`;
+    grid.appendChild(marker);
+    nowMarkerInfo = { el: marker, timePoints };
+  }
+
   pane.appendChild(grid);
   return pane;
 }
@@ -295,6 +333,25 @@ function assemblePage(data) {
     const day = e.target.dataset.bsTarget?.replace("#pane-", "");
     if (day) selectEl.value = day;
   });
+
+  // Live-update now-marker position every 60 s
+  setInterval(() => {
+    if (!nowMarkerInfo) return;
+    const { el, timePoints } = nowMarkerInfo;
+    const now = getET().min;
+    if (now < timePoints[0] || now > timePoints[timePoints.length - 1]) {
+      el.style.display = "none";
+      return;
+    }
+    // Snap to largest timePoint ≤ current time
+    let bestRow = 1;
+    for (let i = 0; i < timePoints.length; i++) {
+      if (timePoints[i] <= now) bestRow = i + 1; else break;
+    }
+    el.style.gridRow = `${bestRow}`;
+    el.dataset.time = fmt(now);
+    el.style.display = "";
+  }, 60_000);
 }
 
 // ── Entry point ───────────────────────────────────────────────────────────────
