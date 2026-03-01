@@ -158,6 +158,17 @@ function buildDay(day, items) {
     }
   }
 
+  // Compute now-marker mobile order: insert after last item starting ≤ nowMin
+  let nowMarkerOrder = 0;
+  if (nowMin !== null) {
+    for (const [item, ord] of mobileOrderMap) {
+      if (toMin(item.Time) <= nowMin) nowMarkerOrder = Math.max(nowMarkerOrder, ord + 1);
+    }
+    for (const [item, ord] of mobileOrderMap) {
+      if (ord >= nowMarkerOrder) mobileOrderMap.set(item, ord + 1);
+    }
+  }
+
   // ── Render items
   sorted.forEach(item => {
     const startMin = toMin(item.Time);
@@ -247,6 +258,7 @@ function buildDay(day, items) {
     marker.className = "now-marker";
     marker.dataset.time = fmt(nowMin);
     marker.style.gridRow = `${rowOf(nowMin)}`;
+    marker.style.order = nowMarkerOrder;
     grid.appendChild(marker);
     nowMarkerInfo = { el: marker, timePoints };
   }

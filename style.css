@@ -316,7 +316,14 @@ body {
     display: none;
   }
   .now-marker {
-    display: none;
+    width: 100% !important;
+    grid-column: unset !important;
+    grid-row: unset !important;
+    margin: 0;
+  }
+  .now-marker::before {
+    width: auto;
+    padding-right: 8px;
   }
   .day-tabs-desktop {
     display: none !important;
