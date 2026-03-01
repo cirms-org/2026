@@ -216,10 +216,8 @@ function buildDay(day, items) {
       const cls = isEnd ? "sc-adjourn"
         : track === "Plen" ? "sc-plen"
         : "sc-break";   // Break, Photo, Train
-      const mTrack = track === "Break" ? "Break" : "Plenary";
       const fullEl = document.createElement("div");
       fullEl.className = `sc ${cls}${item.Highlight === "yes" ? " sc-highlight" : ""}`;
-      fullEl.dataset.mobileTrack = mTrack;
       fullEl.style.cssText = `${rowCSS} grid-column: 2 / -1;`;
       fullEl.style.order = mobileOrderMap.get(item);
       fullEl.innerHTML = cardInnerHTML(item, null);
@@ -245,7 +243,6 @@ function buildDay(day, items) {
     // Single track card
     const singleEl = document.createElement("div");
     singleEl.className = `sc sc-${track.toLowerCase()}${item.Highlight === "yes" ? " sc-highlight" : ""}`;
-    singleEl.dataset.mobileTrack = track;
     singleEl.style.cssText = `${rowCSS} grid-column: ${TRACK_COL[track]};`;
     singleEl.style.order = mobileOrderMap.get(item);
     singleEl.innerHTML = cardInnerHTML(item, null);
