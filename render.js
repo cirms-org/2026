@@ -1,9 +1,28 @@
+// render.js — CIRMS Conference Schedule Viewer
+//
+// Parses a CSV schedule and renders it as a responsive, tabbed three-track
+// grid.
+//
+// On desktop the layout is a 4-column CSS Grid (time gutter + one column
+// per base track: MApp, RPHS, RPME), with cards spanning rows via computed
+// grid-row values and a sticky band holding the column headers. On mobile
+// the grid collapses to a single-column flexbox whose order groups parallel
+// tracks by priority between full-width anchors.
+//
+// Joint tracks like "MApp-RPHS" duplicate the card into both columns on desktop
+// and hide the secondary copy on mobile. Full-width tracks (Plen, Break, Start,
+// Adjourn, End, Photo, Train) span all three columns.
+//
+// Rows whose title matches "Session N: …" render as colored header strips
+// rather than cards. The CSV parser handles quoted fields but not escaped
+// quotes — sufficient for the controlled input this schedule uses.
+
 // ── Config ────────────────────────────────────────────────────────────────────
 
 const CSV_FILE    = "schedule.csv";
 const FULL_TRACKS = new Set(["Plen","Break","Start","Adjourn","End","Photo","Train"]);
 const BASE_TRACKS = ["MApp","RPHS","RPME"];
-const TRACK_COL   = { MApp:2, RPHS:3, RPME:4 };
+const TRACK_COL   = { MApp:2, RPHS:3, RPME:4 };   // grid columns (col 1 = time gutter)
 const DAY_LABELS  = { Mon:"Monday, April 13", Tue:"Tuesday, April 14", Wed:"Wednesday, April 15" };
 
 // joint track → CSS class = highest-priority track in pair (MApp > RPHS > RPME)
@@ -58,15 +77,6 @@ function buildDay(day, items) {
   pane.className = "tab-pane fade";
   pane.id = `pane-${day}`;
 
-  const hdr = document.createElement("div");
-  hdr.className = "track-header-row";
-  hdr.innerHTML = `
-    <div></div>
-    <div class="track-col-hdr mapp"><span class="track-abbr">MApp</span><span class="track-full-name">Medical Applications</span></div>
-    <div class="track-col-hdr rphs"><span class="track-abbr">RPHS</span><span class="track-full-name">Radiation Protection &amp; Homeland Security</span></div>
-    <div class="track-col-hdr rpme"><span class="track-abbr">RPME</span><span class="track-full-name">Radiation Processing &amp; Material Effects</span></div>
-  `;
-
   const grid = document.createElement("div");
   grid.className = "schedule-grid";
   grid.style.gridTemplateRows = `repeat(${totalRows}, auto)`;
@@ -82,7 +92,12 @@ function buildDay(day, items) {
     grid.appendChild(lbl);
   });
 
-  // ── Mobile order: full-width items in time order; parallel blocks grouped by track priority
+  // ── Mobile order ──────────────────────────────────────────────────────────
+  // Full-width items keep their natural time position. Between consecutive
+  // full-width items, parallel (per-track) cards are grouped by track
+  // priority (MApp → RPHS → RPME), then by time within each track.
+  // The resulting index is applied as CSS `order` for the mobile flexbox.
+
   function effectivePriority(track) {
     if (FULL_TRACKS.has(track)) return -1;
     const parts = jointParts(track);
@@ -160,8 +175,8 @@ function buildDay(day, items) {
     // Full-width cards
     if (isFull) {
       const cls = isEnd ? "sc-adjourn"
-        : (track === "Break" || track === "Food" || track === "Start" || track === "Train" || track === "Photo") ? "sc-break"
-        : "sc-plen";
+        : track === "Plen" ? "sc-plen"
+        : "sc-break";   // Break, Photo, Train
       const mTrack = track === "Break" ? "Break" : "Plenary";
       const fullEl = document.createElement("div");
       fullEl.className = `sc ${cls}${item.Highlight === "yes" ? " sc-highlight" : ""}`;
@@ -198,7 +213,6 @@ function buildDay(day, items) {
     grid.appendChild(singleEl);
   });
 
-  pane.appendChild(hdr);
   pane.appendChild(grid);
   return pane;
 }
