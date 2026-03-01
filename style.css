@@ -111,7 +111,7 @@ body {
   padding: 6px 0 12px;
 }
 
-/* The sticky one lives in .sticky-band; per-pane ones are hidden */
+/* Per-pane track headers are always hidden (the visible one lives in .sticky-band) */
 .tab-pane .track-header-row {
   display: none;
 }
@@ -261,11 +261,9 @@ body {
     font-size: 0.95rem;
     color: #475569;
   }
+  /* Hide the sticky-band track header on mobile (per-pane ones already hidden above) */
   .track-header-row {
     display: none;
-  }
-  .nav-tabs {
-    padding-left: 0;
   }
   .day-label {
     display: none;
@@ -300,7 +298,7 @@ body {
     grid-column: unset !important;
     grid-row: unset !important;
     margin: 0;
-    order: attr(data-order);
+    /* order is set per-element via JS (style.order) */
   }
 
   /* hide duplicate joint cards on mobile */
