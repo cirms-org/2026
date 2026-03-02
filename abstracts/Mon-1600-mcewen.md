@@ -26,10 +26,10 @@ For the two different radial beam profiles, the calorimeters agreed to within 0.
 
 Combining complementary dosimetry systems enable accurate characterization of UHDR beams, providing robust absorbed dose measurements with an uncertainty of around 1.5 %.
 
-<img src="media/image2.png" style="width:6.5in;height:2.66806in" />
+![Mon-1600-mcewen-01.webp](./assets/Mon-1600-mcewen-01.webp)
 
 **Figure 1.** Radiabeam 10 MeV accelerator
 
-<img src="media/image1.jpg" style="width:5.41129in;height:2.82785in" />
+![Mon-1600-mcewen-01.webp](./assets/Mon-1600-mcewen-02.webp)
 
 **Figure 2.** Variation in calorimeter response with electron pulse length

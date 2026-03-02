@@ -34,6 +34,6 @@ A single pre-exposure dose of BBT-059 provides potent, broad-spectrum protection
 
 > The views expressed here are those of the authors and do not reflect the official policy of AFRRI, USUHS, DoD or the US Government. Neither the authors nor their family members have a financial interest in any commercial product, service, or organization providing financial support for this research.
 
-<img src="media/image1.png" style="width:6.10962in;height:2.50586in" />
+![Mon-1640-dronamraju-01.webp](./assets/Mon-1640-dronamraju-01.webp)
 
 **Figure 1.** Radioprotective efficacy of BBT-059 against high-LET radiation. C57BL/6 mice (A: male, B: female) were treated with BBT-059 or formulation buffer (FB) and exposed to mixed-field (neutron/gamma) radiation. Pre-treatment with BBT-059 significantly increased post-irradiation survival compared to the formulation buffer (FB) group. \*p ≤ 0.05, \*\*p ≤ 0.01, \*\*\*p ≤ 0.001, \*\*\*\*p ≤ 0.0001.
