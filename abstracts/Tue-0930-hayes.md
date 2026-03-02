@@ -2,7 +2,7 @@
 
 **Robert Hayes**
 
-*North Carolina State University*
+- North Carolina State University
 
 ---
 

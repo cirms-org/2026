@@ -1,7 +1,8 @@
 # Toward in vivo dosimetry with plastic scintillation detectors
 
-**Louis Archambault** <br>
-*Department of physics, Université Laval and department of radiation oncology, CHU de Québec – Université Laval, Québec City, QC, G1J 1Z4*
+**Louis Archambault**
+
+- Department of physics, Université Laval and department of radiation oncology, CHU de Québec – Université Laval, Québec City, QC G1J 1Z4, Canada
 
 ---
 

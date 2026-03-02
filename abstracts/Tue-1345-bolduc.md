@@ -1,13 +1,16 @@
 # Development of METREPOL-based triage algorithms for estimating H-ARS severity and radiation dose in a baboon mixed-field radiation model
 
-**David L. Bolduc, William F. Blakely** <br>
-*Uniformed Services University of the Health Sciences, Armed Forces Radiobiology Research Institute, Scientific Research Department, Bethesda, MD, USA*
+**David L. Bolduc, William F. Blakely**
 
- **Lalitha Kurada** <br>
-*Henry M. Jackson Foundation, Rockville, MD*
+- Uniformed Services University of the Health Sciences, Armed Forces Radiobiology Research Institute, Scientific Research Department, Bethesda, MD
 
-**Francis Hérodin** <br>
-*Effets Biologiques des Rayonnements Département, Institut de Recherche Biomédicale des Armées, Brétigny sur Orge, France.*
+ **Lalitha Kurada**
+
+- Henry M. Jackson Foundation, Rockville, MD
+
+**Francis Hérodin**
+
+- Effets Biologiques des Rayonnements Département, Institut de Recherche Biomédicale des Armées, Brétigny sur Orge, France
 
 ---
 

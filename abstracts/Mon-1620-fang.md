@@ -1,8 +1,8 @@
 # A new online computer program for neutron activation analysis
 
-**Rui Fang, Zaijing Sun** <br>
+**Rui Fang, Zaijing Sun**
 
-*Department of Health Physics and Diagnostic Sciences, University of Nevada, Las Vegas, Las Vegas, NV 89154*
+- Department of Health Physics and Diagnostic Sciences, University of Nevada, Las Vegas, Las Vegas, NV 89154
 
 ---
 

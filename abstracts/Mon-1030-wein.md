@@ -1,7 +1,8 @@
 # Cobalt-60 and gamma applications: Effective, understood, growing, and sustainable
 
-**Corby Nicholson** <br>
-*Nordion, 447 March Road, Ottawa, ON K2K 1X8, Canada*
+**Corby Nicholson**
+
+- Nordion, 447 March Road, Ottawa ON, K2K 1X8, Canada
 
 ---
 

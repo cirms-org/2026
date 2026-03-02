@@ -1,7 +1,8 @@
 # A Modern Evaluation of Maximum Dose Limitations in Radiation Processing
 
-**Michael Christofaro** <br>
-*Reveam Inc.*
+**Michael Christofaro**
+
+- Reveam Inc.
 
 ---
 

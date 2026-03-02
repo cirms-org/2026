@@ -2,7 +2,7 @@
 
 **Jan Schuemann**
 
-*Department of Radiation Oncology, Massachusetts General Hospital and Harvard Medical School*
+- Department of Radiation Oncology, Massachusetts General Hospital and Harvard Medical School
 
 ---
 

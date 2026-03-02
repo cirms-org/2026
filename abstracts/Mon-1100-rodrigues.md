@@ -1,8 +1,9 @@
 
 # Heat you can measure: Verification and standards for clinical hyperthermia
 
-**Dario Rodrigues** <br>
-*Department of Radiation Oncology, University of Maryland School of Medicine, Baltimore, MD, 21201*
+**Dario Rodrigues**
+
+- Department of Radiation Oncology, University of Maryland School of Medicine, Baltimore, MD 21201
 
 ---
 

@@ -1,7 +1,8 @@
 # Neutron Calibrations: Dosimetry and Personnel Protection
 
-**Daniel Jardin, Alan Thompson** <br>
-*National Institute of Standards and Technology, Gaithersburg, MD 20899*
+**Daniel Jardin, Alan Thompson**
+
+- National Institute of Standards and Technology, Gaithersburg MD 20899
 
 ---
 

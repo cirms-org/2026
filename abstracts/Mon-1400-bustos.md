@@ -1,7 +1,8 @@
 # Phytosanitary irradiation in international trade
 
-**Maria Emilia Bustos Griffin** <br>
-*JB TRINI Associates, Phytosanitary Solutions, 172 Roan Drive Garner NC 27529* <br>
+**Maria Emilia Bustos Griffin**
+
+- JB TRINI Associates, Phytosanitary Solutions, 172 Roan Drive Garner NC 27529
 
 ---
 

@@ -1,10 +1,12 @@
 # Fast Neutron Dosimetry and Intensity Modulated Neutron Therapy (IMNT) at the University of Washington Medical Cyclotron Facility (UWMCF)
 
-**Adrienne Lehnert, Marissa Kranz,  Jie Fu, Jay J Liao, Michael R Folkert, Robert D Stewart** <br>
-*Department of Radiation Oncology, University of Washington, Seattle, WA 98195*
+**Adrienne Lehnert, Marissa Kranz,  Jie Fu, Jay J Liao, Michael R Folkert, Robert D Stewart**
 
-**Robert S Miyaoka** <br>
-*Department of Radiology, University of Washington, Seattle, WA 98195*
+- Department of Radiation Oncology, University of Washington, Seattle, WA 98195
+
+**Robert S Miyaoka**
+
+- Department of Radiology, University of Washington, Seattle, WA 98195
 
 ---
 

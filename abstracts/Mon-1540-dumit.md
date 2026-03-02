@@ -1,16 +1,20 @@
 # Modeling plutonium decorporation in female nuclear workers treated with Ca-DTPA
 
-**Sara Dumit** <br>
-*Los Alamos National Laboratory (LANL), Radiation Protection Division, Los Alamos, NM 87545, USA*
+**Sara Dumit**
 
-**Maia Avtandilashvili, Stacey L. McComish, Sergey Y. Tolmachev** <br>
-*United States Transuranium and Uranium Registries (USTUR), Washington State University (WSU), Richland, Washington 99354*
+- Los Alamos National Laboratory (LANL), Radiation Protection Division, Los Alamos, NM 87545
 
-**Guthrie Miller** <br>
-*Unaffiliated (retired from Los Alamos National Laboratory), Santa Fe, NM, USA*
+**Maia Avtandilashvili, Stacey L. McComish, Sergey Y. Tolmachev**
 
-**Jasen Swanson** <br>
-*Army, Madigan Army Medical Center, Joint Base Lewis-McChord, WA 98431, USA*
+- United States Transuranium and Uranium Registries (USTUR), Washington State University (WSU), Richland, WA 99354
+
+**Guthrie Miller**
+
+- Unaffiliated (retired from Los Alamos National Laboratory), Santa Fe, NM
+
+**Jasen Swanson**
+
+- Army, Madigan Army Medical Center, Joint Base Lewis-McChord, WA 98431
 
 ---
 

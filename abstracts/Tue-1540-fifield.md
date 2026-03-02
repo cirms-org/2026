@@ -1,10 +1,12 @@
 # Latest Efforts of an International Collaborative Team Studying Differences in Effects for Gamma, E-beam and X-ray Irradiation Applications
 
-**Leo Fifield, Randy Schwarz, Mark Murphy** <br>
-*Pacific Northwest National Laboratory, Richland, WA, USA*
+**Leo Fifield, Randy Schwarz, Mark Murphy**
 
-**Nicolas Ludwig, Florent Kuntz** <br>
-*Aerial CRT, Strasbourg, FRANCE*
+- Pacific Northwest National Laboratory, Richland, WA
+
+**Nicolas Ludwig, Florent Kuntz**
+
+- Aerial CRT, Strasbourg, France
 
 ---
 

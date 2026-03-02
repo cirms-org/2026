@@ -1,7 +1,8 @@
 # The Effect of E-beam Irradiation Direction on Product Dose Uniformity and Dosimeter Response
 
-**Ayeh Jowzaee** <br>
-*STERIS Applied Sterilization Technologies, Libertyville, IL 60048*
+**Ayeh Jowzaee**
+
+- STERIS Applied Sterilization Technologies, Libertyville, IL 60048
 
 ---
 

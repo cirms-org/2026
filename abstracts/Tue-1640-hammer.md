@@ -1,7 +1,8 @@
 # Using TLDs for In-vivo Radiotherapy Dose Verification
 
-**Cliff Hammer** <br>
-*Department of Medical Physics, University of Wisconsin - Madison, Madison, WI 53705*
+**Cliff Hammer**
+
+- Department of Medical Physics, University of Wisconsin – Madison, Madison, WI 53705
 
 ---
 

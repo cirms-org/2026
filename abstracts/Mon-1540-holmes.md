@@ -1,7 +1,8 @@
 # Creating an ultra-thin parallel plate ionization chamber for Flash dosimetry
 
-**Shannon Holmes, Brian Hooten** <br>
-*Standard Imaging Inc., Middleton, WI, 53562*
+**Shannon Holmes, Brian Hooten**
+
+- Standard Imaging Inc., Middleton, WI 53562
 
 ---
 

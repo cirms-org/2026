@@ -1,11 +1,13 @@
 # Dose uniformity ratio changes due to device movement in radiation sterilization
 
-**Tobias Funk, Daniel Badali** <br>
-*Dose Insight, Newark, CA, 94553;* <br>
-*Triple Ring Technologies, Newark, CA, 94553*
+**Tobias Funk, Daniel Badali**
 
-**Eric Bird** <br>
-*Triple Ring Technologies, Newark, CA, 94553*
+- Dose Insight, Newark, CA 94553
+- Triple Ring Technologies, Newark, CA 94553
+
+**Eric Bird**
+
+- Triple Ring Technologies, Newark, CA 94553
 
 ---
 
