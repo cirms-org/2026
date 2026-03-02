@@ -1,5 +1,8 @@
 /* ── Variables ──────────────────────────────────────────────────────── */
+
 :root {
+  --cirms-blue: #001f4f;
+
   --mapp-bg:      #eff6ff; --mapp-border:  #6366f1; --mapp-text:    #1e3a8a;
   --rphs-bg:      #f0fdf4; --rphs-border:  #16a34a; --rphs-text:    #14532d;
   --rpme-bg:      #fffbeb; --rpme-border:  #d97706; --rpme-text:    #78350f;
@@ -26,7 +29,7 @@ body {
 /* ── Header ─────────────────────────────────────────────────────────── */
 
 .conf-header {
-  background: #0f172a;
+  background: var(--cirms-blue);
   color: #fff;
   padding: 1rem 0 1.4rem;
 }
@@ -67,7 +70,7 @@ body {
   background: #e2e8f0;
 }
 .nav-tabs .nav-link.active {
-  background: #0f172a;
+  background: var(--cirms-blue);
   color: #fff;
   font-weight: 600;
   border: none;
@@ -349,7 +352,7 @@ body {
     font-size: 1rem;
     font-weight: 600;
     color: #fff;
-    background: #0f172a;
+    background: var(--cirms-blue);
     border: none;
     border-radius: 6px;
     padding: 0.45rem 2rem 0.45rem 0.9rem;
