@@ -287,13 +287,13 @@ function parseCSV(text) {
     const row = {};
     headers.forEach((h, i) => row[h.trim()] = (vals[i] || "").trim());
     return {
-      Day:       row["Day"]      || "",
-      Track:     row["Track"]    || "",
-      Time:      row["Time"]     || "",
-      Dur:       row["Duration"] || "",
-      Event:     row["Title"]    || row["Event"] || "",
-      Speaker:   row["Speaker"]  || "",
-      Affil:     row["Affil"]    || "",
+      Day:       row["Day"]         || "",
+      Track:     row["Track"]       || "",
+      Time:      row["Time"]        || "",
+      Dur:       row["Duration"]    || "",
+      Event:     row["Title"]       || row["Event"] || "",
+      Speaker:   row["Speaker"]     || "",
+      Affil:     row["Affiliation"] || "",
       Highlight: row["Star"] && row["Star"].trim().toLowerCase() === "yes" ? "yes" : "",
     };
   }).filter(r => r.Day);
