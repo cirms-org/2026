@@ -6,12 +6,11 @@
 
   --plen-bg: #ffffff; --plen-border: #94a3b8; --plen-text: #1e293b;
   --mute-bg: #f8fafc; --mute-border: #cbd5e1; --mute-text: #475569;
-  --high-bg: #ffffaa; --high-border: #fed766; --high-text: #745b0a;
+  --high-bg: #ffffde; --high-border: #ffe734; --high-text: #7a601e;
 
   --mapp-bg: #eff6ff; --mapp-border: #6366f1; --mapp-text: #1e3a8a;
   --rphs-bg: #f0fdf4; --rphs-border: #16a34a; --rphs-text: #14532d;
-  --rpme-bg: #fffbeb; --rpme-border: #d97706; --rpme-text: #78350f;
-
+  --rpme-bg: #ffefde; --rpme-border: #d97706; --rpme-text: #78350f;
 }
 
 /* ── Base ───────────────────────────────────────────────────────────── */
