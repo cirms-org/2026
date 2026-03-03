@@ -213,7 +213,7 @@ function buildDay(day, items) {
 
     // Full-width cards
     if (isFull) {
-      const cls = isMute ? "sc-mute"
+      const cls = isMute ? "sc-mute" : "sc-plen";
       const fullEl = document.createElement("div");
       fullEl.className = `sc ${cls}${item.Highlight === "yes" ? " sc-highlight" : ""}`;
       fullEl.style.cssText = `${rowCSS} grid-column: 2 / -1;`;
