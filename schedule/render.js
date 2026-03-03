@@ -64,13 +64,10 @@ function getET() {
 
 let nowMarkerInfo = null;  // { el, timePoints } — at most one marker across all day panes
 
-const partnerBadgeStyle = t => `background:var(--${t.toLowerCase()}-border);color:#fff;`;
-
-function cardInnerHTML(item, partnerTrack) {
+function cardInnerHTML(item) {
   const dur = parseDur(item.Dur);
   const durStr = dur ? ` · ${dur} min` : "";
   return `
-    ${partnerTrack ? `<div class="sc-joint-badge" style="${partnerBadgeStyle(partnerTrack)}">Joint with ${partnerTrack}</div>` : ""}
     <div class="sc-time">${item.Time}${durStr}</div>
     <div class="sc-title">${item.Event}</div>
     ${item.Speaker ? `<div class="sc-speaker">${item.Speaker}${item.Affil ? ` &nbsp;·&nbsp; <span class="sc-affil">${item.Affil}</span>` : ""}</div>` : ""}
@@ -235,40 +232,56 @@ function buildDay(day, items) {
     const order    = mobileOrderMap.get(item);
     const hlClass  = item.Highlight === "yes" ? " sc-highlight" : "";
 
-    const sessHTML = (text, speaker) =>
-      `<span class="sess-title">${text}</span>${speaker ? `<span class="sess-chair">${speaker}</span>` : ""}`;
+    // sessHTML: renders session header content.
+    // For joint headers, a "Joint · X" pill is shown right-aligned using the
+    // partner track's soft background and saturated border colour as text,
+    // so it reads as coloured without clashing against the header fill.
+    const sessHTML = (text, speaker, partnerTrack) =>
+      `<span class="sess-hdr-top">
+        <span class="sess-title">${text}</span>
+        ${partnerTrack ? `<span class="sess-joint-badge" style="background:var(--${partnerTrack.toLowerCase()}-bg);color:var(--${partnerTrack.toLowerCase()}-border)">Joint&thinsp;·&thinsp;${partnerTrack}</span>` : ""}
+      </span>
+      ${speaker ? `<span class="sess-chair">${speaker}</span>` : ""}`;
+
     const text = chair ? item.Event.replace(/^session\s+\d+:\s*/i, "") : "";
 
     if (chair) {
       if (joints) {
         const sortedJ = [...joints].sort((a, b) => TRACK_PRIORITY[a] - TRACK_PRIORITY[b]);
-        sortedJ.forEach((t, idx) => addEl(
-          `sess-hdr ${t.toLowerCase()}${idx > 0 ? " joint-secondary" : ""}`,
-          `${rowCSS} grid-column: ${TRACK_COL[t]};`, order,
-          sessHTML(text, item.Speaker)
-        ));
+        sortedJ.forEach((t, idx) => {
+          const partner = sortedJ.find(p => p !== t);
+          addEl(
+            `sess-hdr ${t.toLowerCase()}${idx > 0 ? " joint-secondary" : ""}`,
+            `${rowCSS} grid-column: ${TRACK_COL[t]};`, order,
+            sessHTML(text, item.Speaker, partner)
+          );
+        });
       } else {
         const jClass = isFull ? "full" : track.toLowerCase();
         const colCSS = isFull ? "grid-column: 2 / -1;" : `grid-column: ${TRACK_COL[track]};`;
-        addEl(`sess-hdr ${jClass}`, rowCSS + colCSS, order, sessHTML(text, item.Speaker));
+        addEl(`sess-hdr ${jClass}`, rowCSS + colCSS, order, sessHTML(text, item.Speaker, null));
       }
       return;
     }
 
     if (isFull) {
       const cls = track === "Break" ? "sc-mute" : "sc-plen";
-      addEl(`sc ${cls}${hlClass}`, `${rowCSS} grid-column: 2 / -1;`, order, cardInnerHTML(item, null));
+      addEl(`sc ${cls}${hlClass}`, `${rowCSS} grid-column: 2 / -1;`, order, cardInnerHTML(item));
       return;
     }
 
     if (joints) {
+      // Each joint card gets its own track colour as the main border-left, plus
+      // the partner's colour as a secondary stripe via --partner-border-color
+      // (consumed by .sc-joint in CSS via inset box-shadow).
       const sortedJ = [...joints].sort((a, b) => TRACK_PRIORITY[a] - TRACK_PRIORITY[b]);
       sortedJ.forEach((t, idx) => {
         const partner = sortedJ.find(p => p !== t);
         addEl(
-          `sc sc-${t.toLowerCase()}${idx > 0 ? " joint-secondary" : ""}${hlClass}`,
-          `${rowCSS} grid-column: ${TRACK_COL[t]};`, order,
-          cardInnerHTML(item, partner)
+          `sc sc-${t.toLowerCase()} sc-joint${idx > 0 ? " joint-secondary" : ""}${hlClass}`,
+          `${rowCSS} grid-column: ${TRACK_COL[t]}; --partner-border-color: var(--${partner.toLowerCase()}-border);`,
+          order,
+          cardInnerHTML(item)
         );
       });
       return;
@@ -277,7 +290,7 @@ function buildDay(day, items) {
     addEl(
       `sc sc-${track.toLowerCase()}${hlClass}`,
       `${rowCSS} grid-column: ${TRACK_COL[track]};`, order,
-      cardInnerHTML(item, null)
+      cardInnerHTML(item)
     );
   });
 
