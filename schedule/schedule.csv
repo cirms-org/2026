@@ -17,8 +17,8 @@ Mon,RPHS-RPME,14:00,0:20,Phytosanitary irradiation in International Trade,Emilia
 Mon,RPHS-RPME,14:20,0:20,Ebeam Simulation Study,Ayeh Jowzaee,STERIS,
 Mon,RPHS-RPME,14:40,0:20,Food Irradiation,Mike Christafaro,Reveam,
 Mon,MApp,13:30,0:10,Session 1: Neutron dosimetry,"Sergio Morato Rafet, Tom Winters, and Matthew Mille",,
-Mon,MApp,13:40,0:20,TBD,Yannick Poirier,University of Maryland School of Medicine,
-Mon,MApp,14:00,0:20,TBD,Daniela Stricklin,CDC,
+Mon,MApp,13:40,0:20,"Radiation safety considerations for electron and proton FLASH vaults: shielding, neutron production, and neutron activation",Yannick Poirier,University of Maryland School of Medicine,
+Mon,MApp,14:00,0:20,Revisiting Deterministic Neutron RBEs in Urban Nuclear Detonation Scenarios and Implications in Other Neutron Exposure Settings,Daniela Stricklin,CDC,
 Mon,MApp,14:20,0:20,Neutron calibrations: Dosimetry and personnel protection,Daniel Jardin,NIST,
 Mon,MApp,14:40,0:20,Neutron dosimetry in Intensity-Modulated Neutron Therapy (IMNT) cancer treatment,Adrienne Lehnert,University of Washington,
 Mon,Break,15:00,0:30,Health Break,,,
@@ -26,7 +26,7 @@ Mon,MApp-RPME,15:30,0:10,Session 2: Flash radiotherapy,"Wes Culberson, Matthew M
 Mon,MApp-RPME,15:40,0:20,Creating an ultra-thin parallel plate ionization chamber for Flash dosimetry,Shannon Holmes,Standard Imaging,
 Mon,MApp-RPME,16:00,0:20,A complementary multidetector dosimetry system for the traceable characterization of a novel UHDR electron beam,Malcom McEwen,National Research Council Canada,
 Mon,MApp-RPME,16:20,0:20,"Design, optimization, and characterization of a MLSIC device for proton FLASH-RT QA in a synchrocyclotron and an isochronous cyclotron",Tiezhi Zhang,TetraImaging LLC,
-Mon,MApp-RPME,16:40,0:20,TBD,"Bill Nett, Paul Boisseau ",Pyramid Technical Consultants,
+Mon,MApp-RPME,16:40,0:20,TBD,,,
 Mon,RPHS,15:30,0:10,Session 2: Radiation Measurement & Consequence Management,Emmanuel Mate-Kole and Sara Dumit,,
 Mon,RPHS,15:40,0:20,Modeling plutonium decorporation in female nuclear worker treated with Ca-DTPA,Sara Dumit,LANL,
 Mon,RPHS,16:00,0:20,TBD,Mirela Kirr,Radiation Detection Company,
@@ -41,8 +41,8 @@ Tue,Plen,9:50,0:20,Plenary 4: Investigating the FLASH effect with Monte Carlo si
 Tue,Break,10:10,0:20,Health break,,,
 Tue,Plen,10:30,1:30,Needs working groups,,,yes
 Tue,Break,12:00,0:15,Lunch,,,
-Tue,Plen,12:15,0:45,Mentoring session,,,
-Tue,Plen,13:00,0:30,Group photo,,,yes
+Tue,Train,12:15,0:45,Mentoring session,,,
+Tue,Photo,13:00,0:30,Group photo,,,yes
 Tue,Plen,13:30,0:15,Plenary 5: Biodosimetry: A Tribute to Dr Miral Dizdaroglu,Amitava Adhikary,University of Iowa,
 Tue,Plen,13:45,0:15,Plenary 6: Development of METREPOL-based triage algorithms for estimating H-ARS severity and radiation dose in a baboon mixed-field radiation model,David L. Bolduc,AFRRI ,
 Tue,Plen,14:00,0:30,Plenary 7: Biodosimetry at NIST,Joey Robertson,NIST,
@@ -58,7 +58,7 @@ Tue,RPME,15:40,0:20,"Latest efforts of an international collaborative team study
 Tue,RPME,16:00,0:20,TBD,,,
 Tue,RPME,16:20,0:20,Dosimetry challenges related to research sample irradiations,Angela Sanders,Nordion,
 Tue,RPME,16:40,0:20,TBD,,,
-Tue,Break,17:00,1:00,CIRMS reception,,,yes
+Tue,Plen,17:00,1:00,CIRMS reception,,,yes
 Tue,Break,18:00,,Adjourn,,,
 Wed,Break,8:00,1:00,Breakfast,,,
 Wed,Plen,9:00,0:15,President Welcome,Cody Wilson,IBA Industrial,
