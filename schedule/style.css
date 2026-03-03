@@ -291,6 +291,9 @@ body {
   background: #ef4444;
   border-radius: 1px;
 }
+.now-marker-extra {
+  display: none;
+}
 
 /* ── Mobile ──────────────────────────────────────────────────────────── */
 
@@ -333,6 +336,9 @@ body {
     height: 2px;
     background: #ef4444;
     margin-left: -1px;
+  }
+  .now-marker-extra {
+    display: flex !important;
   }
   .day-tabs-desktop {
     display: none !important;

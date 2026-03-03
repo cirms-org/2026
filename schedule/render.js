@@ -173,6 +173,43 @@ function buildDay(day, items) {
     }
   }
 
+  // Extra now-markers between parallel track groups (mobile only)
+  const extraMarkerOrders = [];
+  if (nowMin !== null) {
+    const ordered = [...mobileOrderMap.entries()].sort((a, b) => a[1] - b[1]);
+    let prevPrio = null;
+    let groupHadNow = false;
+
+    for (const [item, ord] of ordered) {
+      if (FULL_TRACKS.has(item.Track)) {
+        prevPrio = null;
+        groupHadNow = false;
+        continue;
+      }
+      const prio = effectivePriority(item);
+      if (prevPrio !== null && prio !== prevPrio && groupHadNow) {
+        if (ord !== nowMarkerOrder) extraMarkerOrders.push(ord);
+        groupHadNow = false;
+      }
+      prevPrio = prio;
+      if (toMin(item.Time) <= nowMin) groupHadNow = true;
+    }
+
+    // Bump orders for extra markers (highest first to avoid cascading)
+    extraMarkerOrders.sort((a, b) => b - a);
+    for (const insertOrd of extraMarkerOrders) {
+      for (const [item, ord] of mobileOrderMap) {
+        if (ord >= insertOrd) mobileOrderMap.set(item, ord + 1);
+      }
+      if (nowMarkerOrder >= insertOrd) nowMarkerOrder++;
+    }
+    // Adjust extra orders for cascading shifts
+    extraMarkerOrders.reverse();
+    for (let k = 0; k < extraMarkerOrders.length; k++) {
+      extraMarkerOrders[k] += k;
+    }
+  }
+
   // ── Render items
   sorted.forEach(item => {
     const startMin = toMin(item.Time);
@@ -231,7 +268,7 @@ function buildDay(day, items) {
     );
   });
 
-  // Now-marker: red line showing current time
+  // Now-markers: primary (desktop + mobile) + extras (mobile only)
   if (nowMin !== null) {
     const marker = document.createElement("div");
     marker.className = "now-marker";
@@ -240,6 +277,14 @@ function buildDay(day, items) {
     marker.style.order = nowMarkerOrder;
     grid.appendChild(marker);
     nowMarkerInfo = { el: marker, timePoints };
+
+    extraMarkerOrders.forEach(ord => {
+      const extra = document.createElement("div");
+      extra.className = "now-marker now-marker-extra";
+      extra.dataset.time = fmt(nowMin);
+      extra.style.order = ord;
+      grid.appendChild(extra);
+    });
   }
 
   pane.appendChild(grid);
