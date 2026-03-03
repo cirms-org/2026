@@ -17,10 +17,14 @@
 // rather than cards. The CSV parser handles quoted fields but not escaped
 // quotes — sufficient for the controlled input this schedule uses.
 
+// ── Debug ─────────────────────────────────────────────────────────────────────
+
+const DEBUG_DAY   = "Mon";   // "Mon"/"Tue"/"Wed" to test now-marker with today's clock; null for production
+const DEBUG_TIME  = "14:10"; // "HH:MM" to override current time; null for production
+
 // ── Config ────────────────────────────────────────────────────────────────────
 
 const CSV_FILE    = "schedule.csv";
-const DEBUG_DAY   = "Mon";   // "Mon"/"Tue"/"Wed" to test now-marker with today's clock; null for production
 const FULL_TRACKS = new Set(["Plen","Break","Photo","Train"]);
 const BASE_TRACKS = ["MApp","RPHS","RPME"];
 const TRACK_COL   = { MApp:2, RPHS:3, RPME:4 };   // grid columns (col 1 = time gutter)
@@ -54,7 +58,7 @@ function getET() {
   const g = type => parts.find(p => p.type === type).value;
   return {
     date: DEBUG_DAY ? DAY_DATES[DEBUG_DAY] : `${g("year")}-${g("month")}-${g("day")}`,
-    min: parseInt(g("hour")) * 60 + parseInt(g("minute"))
+    min: DEBUG_TIME ? toMin(DEBUG_TIME) : parseInt(g("hour")) * 60 + parseInt(g("minute"))
   };
 }
 
