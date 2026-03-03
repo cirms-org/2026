@@ -132,7 +132,7 @@ body {
 .track-header-row {
   display: grid;
   grid-template-columns: 52px 1fr 1fr 1fr;
-  gap: 6px;
+  gap: 8px;
   padding: 6px 0 12px;
 }
 
