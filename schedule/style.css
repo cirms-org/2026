@@ -58,9 +58,7 @@ body {
 .nav-tabs {
   border-bottom: none;
   gap: 0.35rem;
-  padding-left: 0;
-  padding-top: 0;
-  padding-bottom: 0.5rem;
+  padding: 0 0 0.5rem;
   background: var(--background);
 }
 .nav-tabs .nav-link {
@@ -81,7 +79,6 @@ body {
   background: var(--cirms-blue);
   color: #fff;
   font-weight: 600;
-  border: none;
 }
 
 /* ── Mobile day select ───────────────────────────────────────────────── */
@@ -227,28 +224,6 @@ body {
   border-right: 3px solid var(--partner-border-color, transparent);
 }
 
-/* ── Session header: right-side badge group ──────────────────────────── */
-
-/* Joint badge inside session header.
-   Soft track background with the saturated border colour as text — reads
-   as clearly coloured against the header fill without any clash.
-   Inset shadow presses it into the surface for a punch-through feel.      */
-.sess-joint-badge {
-  display: inline-flex;
-  align-items: center;
-  flex-shrink: 0;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  padding: 2px 7px;
-  border-radius: 3px;
-  opacity: 0.95;
-  box-shadow:
-    inset 0 2px 5px rgba(0,0,0,0.45),
-    inset 0 0 0 1px rgba(0,0,0,0.18);
-}
-
 /* ── Highlight overlay ──────────────────────────────────────────────── */
 
 .sc-highlight {
@@ -280,7 +255,7 @@ body {
 .sess-title     { font-weight: 700; line-height: 1.3; }
 .sess-chair     { font-size: 0.78rem; opacity: 0.88; }
 
-/* Title row: title on left, joint pill on right, baseline-aligned */
+/* Title row: title on left, joint pill on right */
 .sess-hdr-top {
   display: flex;
   align-items: baseline;
@@ -292,9 +267,8 @@ body {
 .sess-hdr.rpme  { background: var(--rpme-border); color: #fff; }
 .sess-hdr.full  { background: #64748b; color: #fff; }
 
-/* Joint badge inside session header.
-   Styled as a punch-through: soft track bg at reduced opacity, inset shadow
-   carves it into the header surface. Text is the track's own colour.      */
+/* Joint badge: soft track bg, saturated border colour as text, punch-through
+   inset shadow so it reads as carved into the header surface.              */
 .sess-joint-badge {
   display: inline-flex;
   align-items: center;
@@ -303,12 +277,12 @@ body {
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  padding: 2px 7px;
+  padding: 3px 7px 1px;
   border-radius: 3px;
   opacity: 0.95;
   box-shadow:
-    inset 0 1px 3px rgba(0,0,0,0.35),
-    inset 0 0 0 1px rgba(0,0,0,0.12);
+    inset 0 2px 3px rgba(0,0,0,0.65),
+    inset 0 0 0 1px rgba(0,0,0,0.35);
 }
 
 /* ── Now marker (current-time line) ──────────────────────────────────── */
@@ -328,7 +302,8 @@ body {
   color: #ef4444;
   width: var(--gutter-width);
   text-align: right;
-  padding-right: 6px;
+  padding-right: 10px;
+  margin-left: -4px;
   flex-shrink: 0;
   box-sizing: border-box;
 }
@@ -338,7 +313,25 @@ body {
   height: 2px;
   background: #ef4444;
   border-radius: 1px;
+  margin-right: -16px;
 }
+.now-dots {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+  margin-left: -5px;
+  margin-right: -3px;
+}
+.now-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+  flex-shrink: 0;
+}
+/* Desktop: one dot sufficient — the spanning line signals the time */
+.now-dot:not(:first-child) { display: none; }
 .now-marker-extra {
   display: none;
 }
@@ -353,7 +346,7 @@ body {
     font-size: 0.95rem;
     color: #475569;
   }
-  /* Hide the sticky-band track header on mobile (per-pane ones already hidden above) */
+  /* Track header is desktop-only — hidden on mobile */
   .track-header-row {
     display: none;
   }
@@ -367,15 +360,10 @@ body {
     grid-row: unset !important;
     margin: 0;
     padding: 2px 0;
-    position: relative;
   }
   .now-marker::before {
-    content: "";
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #ef4444;
-    flex-shrink: 0;
+    content: none; /* suppress time label and circle — dots take over */
+    width: 0;
     padding: 0;
   }
   .now-marker::after {
@@ -384,7 +372,10 @@ body {
     height: 2px;
     background: #ef4444;
     margin-left: -1px;
+    margin-right: 0;
   }
+  /* All N dots visible on mobile — override the desktop :not(:first-child) hide */
+  .now-dot, .now-dot:not(:first-child) { display: block; }
   .now-marker-extra {
     display: flex !important;
   }

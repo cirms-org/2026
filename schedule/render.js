@@ -233,9 +233,8 @@ function buildDay(day, items) {
     const hlClass  = item.Highlight === "yes" ? " sc-highlight" : "";
 
     // sessHTML: renders session header content.
-    // For joint headers, a "Joint · X" pill is shown right-aligned using the
-    // partner track's soft background and saturated border colour as text,
-    // so it reads as coloured without clashing against the header fill.
+    // For joint headers a "Joint · X" pill is shown right-aligned, using the
+    // partner track's soft background and saturated border colour as text.
     const sessHTML = (text, speaker, partnerTrack) =>
       `<span class="sess-hdr-top">
         <span class="sess-title">${text}</span>
@@ -294,6 +293,30 @@ function buildDay(day, items) {
     );
   });
 
+  // Count distinct non-full-width items running at nowMin — joints count as
+  // one since they appear as a single card on mobile. This equals the number
+  // of now-marker lines the attendee should be on the lookout for.
+  const nowDotCount = nowMin === null ? 0 : (() => {
+    const seen = new Set();
+    sorted.forEach(item => {
+      if (FULL_TRACKS.has(item.Track) || isChair(item)) return;
+      const s = toMin(item.Time), e = s + parseDur(item.Dur);
+      if (s <= nowMin && nowMin < e) seen.add(item);
+    });
+    return Math.max(seen.size, 1);
+  })();
+
+  function makeDots() {
+    const wrap = document.createElement("span");
+    wrap.className = "now-dots";
+    for (let d = 0; d < nowDotCount; d++) {
+      const dot = document.createElement("span");
+      dot.className = "now-dot";
+      wrap.appendChild(dot);
+    }
+    return wrap;
+  }
+
   // Now-markers: primary (desktop + mobile) + extras (mobile only)
   if (nowMin !== null) {
     const marker = document.createElement("div");
@@ -301,6 +324,7 @@ function buildDay(day, items) {
     marker.dataset.time = fmt(nowMin);
     marker.style.gridRow = `${rowOf(nowMin)}`;
     marker.style.order = nowMarkerOrder;
+    marker.appendChild(makeDots());
     grid.appendChild(marker);
     nowMarkerInfo = { el: marker, timePoints };
 
@@ -309,6 +333,7 @@ function buildDay(day, items) {
       extra.className = "now-marker now-marker-extra";
       extra.dataset.time = fmt(nowMin);
       extra.style.order = ord;
+      extra.appendChild(makeDots());
       grid.appendChild(extra);
     });
   }
