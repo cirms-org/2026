@@ -31,7 +31,7 @@ body {
   top: 0;
   z-index: 100;
   background: var(--background);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
 }
 
 /* ── Header ─────────────────────────────────────────────────────────── */
@@ -197,7 +197,7 @@ body {
 }
 .sc:hover {
   box-shadow:
-  0 3px 12px rgba(0,0,0,0.1);
+  0 3px 6px rgba(0,0,0,0.2);
 }
 .sc-time  {
   font-family: 'DM Mono', monospace;
