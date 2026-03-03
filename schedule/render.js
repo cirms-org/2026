@@ -66,7 +66,7 @@ let nowMarkerInfo = null;  // { el, timePoints } — at most one marker across a
 
 function cardInnerHTML(item) {
   const dur = parseDur(item.Dur);
-  const durStr = dur ? ` · ${dur} min` : "";
+  const durStr = (dur && !/adjourn/i.test(item.Event)) ? ` · ${dur} min` : "";
   return `
     <div class="sc-time">${item.Time}${durStr}</div>
     <div class="sc-title">${item.Event}</div>
