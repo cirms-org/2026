@@ -1,0 +1,13 @@
+# abstracts/.gitignore
+
+# Ignore everything
+*
+
+# Except these
+!.gitignore
+!*.md
+!*.html
+!*.css
+!*.json
+!assets/
+!assets/*.webp

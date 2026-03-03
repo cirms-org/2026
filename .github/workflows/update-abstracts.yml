@@ -1,0 +1,31 @@
+name: Update abstracts index
+
+on:
+  push:
+    paths:
+      - 'abstracts/**.md'
+
+jobs:
+  index:
+    runs-on: alpine-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate files.json
+        run: |
+          python3 -c "
+          import os, json
+          files = sorted(f for f in os.listdir('abstracts') if f.endswith('.md'))
+          json.dump(files, open('abstracts/files.json', 'w'), indent=2)
+          print(f'Wrote {len(files)} entries')
+          "
+
+      - name: Commit files.json
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add abstracts/files.json
+          git diff --staged --quiet || git commit -m "chore: regenerate abstracts index"
+          git push
