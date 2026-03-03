@@ -110,7 +110,7 @@ function buildDay(day, items) {
   const grid = document.createElement("div");
   grid.className = "schedule-grid";
   grid.style.gridTemplateRows = `repeat(${totalRows}, auto)`;
-  grid.style.rowGap = "3px";
+  grid.style.rowGap = "5px";
 
   // Helper: create, style, and append a div to the grid
   function addEl(cls, css, order, html) {
