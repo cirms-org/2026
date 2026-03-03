@@ -2,6 +2,7 @@
 
 :root {
   --cirms-blue: #001f4f;
+  --background: #f1f5ff;
 
   --mapp-bg:      #eff6ff; --mapp-border:  #6366f1; --mapp-text:    #1e3a8a;
   --rphs-bg:      #f0fdf4; --rphs-border:  #16a34a; --rphs-text:    #14532d;
@@ -12,7 +13,7 @@
 
 body {
   font-family: 'DM Sans', sans-serif;
-  background: #f1f5f9;
+  background: var(--background);
   color: #1e293b;
 }
 
@@ -22,7 +23,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: #f1f5f9;
+  background: var(--background);
   box-shadow: 0 2px 12px rgba(0,0,0,0.18);
 }
 
@@ -53,7 +54,7 @@ body {
   padding-left: 0;
   padding-top: 0;
   padding-bottom: 0.5rem;
-  background: #f1f5f9;
+  background: var(--background);
 }
 .nav-tabs .nav-link {
   border: none;
