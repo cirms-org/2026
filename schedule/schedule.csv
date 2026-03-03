@@ -1,5 +1,5 @@
 ﻿Day,Track,Time,Duration,Title,Speaker,Affiliation,Star
-Mon,Start,8:00,0:15,Registration,,,
+Mon,Break,8:00,0:15,Registration,,,
 Mon,Break,8:15,0:45,Breakfast,,,
 Mon,Plen,9:00,0:15,Presidents Welcome,Cody Wilson,IBA Industrial,
 Mon,Plen,9:15,0:15,Introduction to Needs Report,Shaheen Dewji,Georgia Institute of Technology,
@@ -32,7 +32,7 @@ Mon,RPHS,15:40,0:20,Modeling plutonium decorporation in female nuclear worker tr
 Mon,RPHS,16:00,0:20,TBD,Mirela Kirr,Radiation Detection Company,
 Mon,RPHS,16:20,0:20,A new online computer program for neutron activation analysis,Rui Fang,"University of Nevada, Las Vegas",
 Mon,RPHS,16:40,0:20,"BBT-059, a PEGylated Interleukin-11 Analog, Confers Radioprotection Against Low- and High-LET Radiation",Venkateshwara Dronamraju,Henry M Jackson Foundation for the Advancement of Military Medicine,
-Mon,Adjourn,17:00,,Adjourn,,,
+Mon,Break,17:00,,Adjourn,,,
 Tue,Break,8:00,1:00,Breakfast,,,
 Tue,Plen,9:00,0:10,Presidents Welcome,Cody Wilson,IBA Industrial,
 Tue,Plen,9:10,0:20,Keynote: Commonwealth Fusion Systems ,Andrea Saltos,CFS,yes
@@ -41,8 +41,8 @@ Tue,Plen,9:50,0:20,Plenary 4: Investigating the FLASH effect with Monte Carlo si
 Tue,Break,10:10,0:20,Health break,,,
 Tue,Plen,10:30,1:30,Needs working groups,,,yes
 Tue,Break,12:00,0:15,Lunch,,,
-Tue,Train,12:15,0:45,Mentoring session,,,
-Tue,Photo,13:00,0:30,Group photo,,,yes
+Tue,Plen,12:15,0:45,Mentoring session,,,
+Tue,Plen,13:00,0:30,Group photo,,,yes
 Tue,Plen,13:30,0:15,Plenary 5: Biodosimetry: A Tribute to Dr Miral Dizdaroglu,Amitava Adhikary,University of Iowa,
 Tue,Plen,13:45,0:15,Plenary 6: Development of METREPOL-based triage algorithms for estimating H-ARS severity and radiation dose in a baboon mixed-field radiation model,David L. Bolduc,AFRRI ,
 Tue,Plen,14:00,0:30,Plenary 7: Biodosimetry at NIST,Joey Robertson,NIST,
@@ -59,7 +59,7 @@ Tue,RPME,16:00,0:20,TBD,,,
 Tue,RPME,16:20,0:20,Dosimetry challenges related to research sample irradiations,Angela Sanders,Nordion,
 Tue,RPME,16:40,0:20,TBD,,,
 Tue,Break,17:00,1:00,CIRMS reception,,,yes
-Tue,Adjourn,18:00,,Adjourn,,,
+Tue,Break,18:00,,Adjourn,,,
 Wed,Break,8:00,1:00,Breakfast,,,
 Wed,Plen,9:00,0:15,President Welcome,Cody Wilson,IBA Industrial,
 Wed,Plen,9:15,0:30,Marshall R. Cleland Award,Tony Berejka,,yes
@@ -70,4 +70,4 @@ Wed,Plen,11:05,0:25,Plenary 9: TBD (could be dropped to finish earlier),,,
 Wed,Plen,11:30,0:25,Capstone Speaker: Nathan Seidle ,Nathan Seidle,SparkFun Electronics,yes
 Wed,Plen,11:55,0:25,Needs Report,Shaheen Dewji,Georgia Institute of Technology,
 Wed,Plen,12:20,0:25,President closing remarks and farewell,Cody Wilson,IBA Industrial,
-Wed,End,12:45,,Adjourn,,,
+Wed,Break,12:45,,Adjourn,,,

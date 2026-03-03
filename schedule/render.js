@@ -10,8 +10,8 @@
 // tracks by priority between full-width anchors.
 //
 // Joint tracks like "MApp-RPHS" duplicate the card into both columns on desktop
-// and hide the secondary copy on mobile. Full-width tracks (Plen, Break, Start,
-// Adjourn, End, Photo, Train) span all three columns.
+// and hide the secondary copy on mobile. Full-width tracks (Plen, Break, Photo,
+// Train) span all three columns.
 //
 // Rows whose title matches "Session N: …" render as colored header strips
 // rather than cards. The CSV parser handles quoted fields but not escaped
@@ -21,7 +21,7 @@
 
 const CSV_FILE    = "schedule.csv";
 const DEBUG_DAY   = "Mon";   // "Mon"/"Tue"/"Wed" to test now-marker with today's clock; null for production
-const FULL_TRACKS = new Set(["Plen","Break","Start","Adjourn","End","Photo","Train"]);
+const FULL_TRACKS = new Set(["Plen","Break","Photo","Train"]);
 const BASE_TRACKS = ["MApp","RPHS","RPME"];
 const TRACK_COL   = { MApp:2, RPHS:3, RPME:4 };   // grid columns (col 1 = time gutter)
 const DAY_LABELS  = { Mon:"Monday, April 13", Tue:"Tuesday, April 14", Wed:"Wednesday, April 15" };
@@ -182,7 +182,7 @@ function buildDay(day, items) {
     const isFull = FULL_TRACKS.has(track);
     const joints = jointParts(track);
     const chair  = isChair(item);
-    const isEnd  = track === "Adjourn" || track === "End" || track === "Start";
+    const isMute = track === "Break"
 
     // Session header strip
     if (chair) {
@@ -213,9 +213,7 @@ function buildDay(day, items) {
 
     // Full-width cards
     if (isFull) {
-      const cls = isEnd ? "sc-adjourn"
-        : track === "Plen" ? "sc-plen"
-        : "sc-break";   // Break, Photo, Train
+      const cls = isMute ? "sc-mute"
       const fullEl = document.createElement("div");
       fullEl.className = `sc ${cls}${item.Highlight === "yes" ? " sc-highlight" : ""}`;
       fullEl.style.cssText = `${rowCSS} grid-column: 2 / -1;`;
