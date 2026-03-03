@@ -178,28 +178,37 @@ function buildDay(day, items) {
   }
 
   // Extra now-markers between parallel track groups (mobile only)
+  // Extra now-markers: for each track group in a parallel block, find where
+  // "now" falls (after the last item starting ≤ nowMin). The primary marker
+  // already covers one group; extras cover the rest.
   const extraMarkerOrders = [];
   if (nowMin !== null) {
     const ordered = [...mobileOrderMap.entries()].sort((a, b) => a[1] - b[1]);
-    let prevPrio = null;
-    let groupHadNow = false;
 
-    for (const [item, ord] of ordered) {
-      if (FULL_TRACKS.has(item.Track)) {
-        prevPrio = null;
-        groupHadNow = false;
-        continue;
+    let idx = 0;
+    while (idx < ordered.length) {
+      if (FULL_TRACKS.has(ordered[idx][0].Track)) { idx++; continue; }
+
+      // Parallel block: all consecutive non-full-width items
+      const blockStart = idx;
+      while (idx < ordered.length && !FULL_TRACKS.has(ordered[idx][0].Track)) idx++;
+
+      // Walk track groups within this block
+      let gi = blockStart;
+      while (gi < idx) {
+        const prio = effectivePriority(ordered[gi][0]);
+        let bestOrd = null;
+        while (gi < idx && effectivePriority(ordered[gi][0]) === prio) {
+          if (toMin(ordered[gi][0].Time) <= nowMin) bestOrd = ordered[gi][1] + 1;
+          gi++;
+        }
+        if (bestOrd !== null && bestOrd !== nowMarkerOrder) {
+          extraMarkerOrders.push(bestOrd);
+        }
       }
-      const prio = effectivePriority(item);
-      if (prevPrio !== null && prio !== prevPrio && groupHadNow) {
-        if (ord !== nowMarkerOrder) extraMarkerOrders.push(ord);
-        groupHadNow = false;
-      }
-      prevPrio = prio;
-      if (toMin(item.Time) <= nowMin) groupHadNow = true;
     }
 
-    // Bump orders for extra markers (highest first to avoid cascading)
+    // Bump orders to make room (process highest insert point first)
     extraMarkerOrders.sort((a, b) => b - a);
     for (const insertOrd of extraMarkerOrders) {
       for (const [item, ord] of mobileOrderMap) {
@@ -207,7 +216,7 @@ function buildDay(day, items) {
       }
       if (nowMarkerOrder >= insertOrd) nowMarkerOrder++;
     }
-    // Adjust extra orders for cascading shifts
+    // Adjust extra order values for the cascading shifts
     extraMarkerOrders.reverse();
     for (let k = 0; k < extraMarkerOrders.length; k++) {
       extraMarkerOrders[k] += k;
