@@ -2,11 +2,16 @@
 
 :root {
   --cirms-blue: #001f4f;
-  --background: #f1f5ff;
+  --background: #e2e8f5;
 
-  --mapp-bg:      #eff6ff; --mapp-border:  #6366f1; --mapp-text:    #1e3a8a;
-  --rphs-bg:      #f0fdf4; --rphs-border:  #16a34a; --rphs-text:    #14532d;
-  --rpme-bg:      #fffbeb; --rpme-border:  #d97706; --rpme-text:    #78350f;
+  --plen-bg:    #ffffff; --plen-border:    #94a3b8; --plen-text: #1e293b;
+  --break-bg:   #f8fafc; --break-border:   #f8fafc; --break-text: #f8fafc;
+  --adjourn-bg: #f1f5f9; --adjourn-border: #e2e8f0; --adjourn-text: #94a3b8;
+
+  --mapp-bg: #eff6ff; --mapp-border: #6366f1; --mapp-text: #1e3a8a;
+  --rphs-bg: #f0fdf4; --rphs-border: #16a34a; --rphs-text: #14532d;
+  --rpme-bg: #fffbeb; --rpme-border: #d97706; --rpme-text: #78350f;
+
 }
 
 /* ── Base ───────────────────────────────────────────────────────────── */
@@ -233,23 +238,19 @@ body {
 /* ── Highlight overlay ──────────────────────────────────────────────── */
 
 .sc-highlight {
-  background: #fefce8 !important;
+  background: #ffffe8 !important;
   color: #713f12 !important;
-  border-left-color: #ca8a04 !important;
+  border-left-color: #fed766 !important;
   border-left-width: 5px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.12);
 }
-.sc-highlight .sc-title::before {
-  content: "★ ";
-  font-size: 0.75em;
-  opacity: 0.6;
-}
-.sc-plen    { background: #fff;       border-left-color: #94a3b8; color: #1e293b; }
-.sc-break   { background: #f8fafc;    border-left-color: #cbd5e1; color: #475569; }
-.sc-adjourn { background: #f1f5f9;    border-left-color: #e2e8f0; color: #94a3b8; font-style: italic; }
-.sc-mapp    { background: var(--mapp-bg); border-left-color: var(--mapp-border); color: var(--mapp-text); }
-.sc-rphs    { background: var(--rphs-bg); border-left-color: var(--rphs-border); color: var(--rphs-text); }
-.sc-rpme    { background: var(--rpme-bg); border-left-color: var(--rpme-border); color: var(--rpme-text); }
+
+.sc-plen    { background: var(--plen-bg);    border-left-color: var(--plen-border);    color: var(--plen-text); }
+.sc-break   { background: var(--break-bg);   border-left-color: var(--break-border);   color: var(--break-text); }
+.sc-adjourn { background: var(--adjourn-bg); border-left-color: var(--adjourn-border); color: var(--adjourn-text); font-style: italic; }
+.sc-mapp    { background: var(--mapp-bg);    border-left-color: var(--mapp-border);    color: var(--mapp-text); }
+.sc-rphs    { background: var(--rphs-bg);    border-left-color: var(--rphs-border);    color: var(--rphs-text); }
+.sc-rpme    { background: var(--rpme-bg);    border-left-color: var(--rpme-border);    color: var(--rpme-text); }
 
 /* ── Session header strip ────────────────────────────────────────────── */
 
