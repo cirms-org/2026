@@ -43,8 +43,8 @@ function jointParts(track) {
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
-const toMin = t => { if (!t) return 0; const [h, m] = t.split(":").map(Number); return h * 60 + (m || 0); };
-const parseDur = d => { if (!d || !d.trim()) return 30; const [h, m] = d.split(":").map(Number); return h * 60 + (m || 0) || 30; };
+const toMin = t => { if (!t) return 0; const [h, m] = t.split(":").map(Number); return (isNaN(h) ? 0 : h) * 60 + (isNaN(m) ? 0 : m); };
+const parseDur = d => { if (!d || !d.trim()) return 30; const [h, m] = d.split(":").map(Number); const v = (isNaN(h) ? 0 : h) * 60 + (isNaN(m) ? 0 : m); return v > 0 ? v : 30; };
 const fmt = m => `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
 const isChair = item => /^session\s+\d+:/i.test(item.Event || "");
 
@@ -58,7 +58,7 @@ function getET() {
   const g = type => parts.find(p => p.type === type).value;
   return {
     date: DEBUG_DAY ? DAY_DATES[DEBUG_DAY] : `${g("year")}-${g("month")}-${g("day")}`,
-    min: DEBUG_TIME ? toMin(DEBUG_TIME) : parseInt(g("hour")) * 60 + parseInt(g("minute"))
+    min: DEBUG_TIME ? toMin(DEBUG_TIME) : (parseInt(g("hour")) % 24) * 60 + parseInt(g("minute"))
   };
 }
 
@@ -103,6 +103,9 @@ function buildDay(day, items) {
   const pane = document.createElement("div");
   pane.className = "tab-pane fade";
   pane.id = `pane-${day}`;
+  pane.setAttribute("role", "tabpanel");
+  pane.setAttribute("tabindex", "0");
+  // aria-labelledby is set in assemblePage once we have the button id
 
   const grid = document.createElement("div");
   grid.className = "schedule-grid";
@@ -326,7 +329,8 @@ function buildDay(day, items) {
     marker.style.order = nowMarkerOrder;
     marker.appendChild(makeDots());
     grid.appendChild(marker);
-    nowMarkerInfo = { el: marker, timePoints };
+    const extraEls = [];
+    nowMarkerInfo = { el: marker, extraEls, timePoints };
 
     extraMarkerOrders.forEach(ord => {
       const extra = document.createElement("div");
@@ -335,6 +339,7 @@ function buildDay(day, items) {
       extra.style.order = ord;
       extra.appendChild(makeDots());
       grid.appendChild(extra);
+      extraEls.push(extra);
     });
   }
 
@@ -390,11 +395,16 @@ function assemblePage(data) {
     const label = DAY_LABELS[day] || day;
 
     // Tab button
+    const btnId = `tab-btn-${day}`;
     const li = document.createElement("li");
     li.className = "nav-item";
+    li.setAttribute("role", "presentation");
     li.innerHTML = `<button class="nav-link ${di === 0 ? "active" : ""}"
+      id="${btnId}"
       data-bs-toggle="tab" data-bs-target="#pane-${day}"
-      type="button" role="tab">${label}</button>`;
+      type="button" role="tab"
+      aria-controls="pane-${day}"
+      aria-selected="${di === 0}">${label}</button>`;
     tabsEl.appendChild(li);
 
     // Mobile select option
@@ -405,6 +415,7 @@ function assemblePage(data) {
 
     // Day pane
     const pane = buildDay(day, items);
+    pane.setAttribute("aria-labelledby", btnId);
     if (di === 0) pane.classList.add("show", "active");
     contentsEl.appendChild(pane);
   });
@@ -423,20 +434,23 @@ function assemblePage(data) {
 
   // Live-update now-marker position every 60 s
   if (nowMarkerInfo) {
-    const { el, timePoints } = nowMarkerInfo;
+    const { el, extraEls, timePoints } = nowMarkerInfo;
     setInterval(() => {
       const now = getET().min;
       if (now < timePoints[0] || now > timePoints[timePoints.length - 1]) {
         el.style.display = "none";
+        extraEls.forEach(x => { x.style.display = "none"; });
         return;
       }
       let bestRow = 1;
       for (let i = 0; i < timePoints.length; i++) {
         if (timePoints[i] <= now) bestRow = i + 1; else break;
       }
+      const t = fmt(now);
       el.style.gridRow = `${bestRow}`;
-      el.dataset.time = fmt(now);
+      el.dataset.time = t;
       el.style.display = "";
+      extraEls.forEach(x => { x.dataset.time = t; x.style.display = ""; });
     }, 60_000);
   }
 }
