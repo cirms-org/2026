@@ -60,12 +60,7 @@ function getET() {
 
 let nowMarkerInfo = null;  // { el, timePoints } — at most one marker across all day panes
 
-function partnerBadgeStyle(partnerTrack) {
-  if (partnerTrack === "RPME") return `background:var(--rpme-border);color:#fff;`;
-  if (partnerTrack === "RPHS") return `background:var(--rphs-border);color:#fff;`;
-  if (partnerTrack === "MApp") return `background:var(--mapp-border);color:#fff;`;
-  return `background:rgba(0,0,0,0.1);color:inherit;`;
-}
+const partnerBadgeStyle = t => `background:var(--${t.toLowerCase()}-border);color:#fff;`;
 
 function cardInnerHTML(item, partnerTrack) {
   const dur = parseDur(item.Dur);
@@ -82,6 +77,9 @@ function cardInnerHTML(item, partnerTrack) {
 
 function buildDay(day, items) {
   const sorted = [...items].sort((a, b) => toMin(a.Time) - toMin(b.Time));
+
+  // Cache joint-track info per item
+  sorted.forEach(item => { item._joints = jointParts(item.Track); });
 
   const timePoints = [...new Set([
     ...sorted.map(i => toMin(i.Time)),
@@ -110,6 +108,16 @@ function buildDay(day, items) {
   grid.style.gridTemplateRows = `repeat(${totalRows}, auto)`;
   grid.style.rowGap = "3px";
 
+  // Helper: create, style, and append a div to the grid
+  function addEl(cls, css, order, html) {
+    const el = document.createElement("div");
+    el.className = cls;
+    el.style.cssText = css;
+    el.style.order = order;
+    el.innerHTML = html;
+    grid.appendChild(el);
+  }
+
   // Time labels
   const shownTimes = new Set(sorted.map(i => toMin(i.Time)));
   shownTimes.forEach(t => {
@@ -126,14 +134,10 @@ function buildDay(day, items) {
   // priority (MApp → RPHS → RPME), then by time within each track.
   // The resulting index is applied as CSS `order` for the mobile flexbox.
 
-  function effectivePriority(track) {
-    if (FULL_TRACKS.has(track)) return -1;
-    const parts = jointParts(track);
-    if (parts) {
-      const p = [...parts].sort((a, b) => TRACK_PRIORITY[a] - TRACK_PRIORITY[b]);
-      return TRACK_PRIORITY[p[0]];
-    }
-    return TRACK_PRIORITY[track] ?? 99;
+  function effectivePriority(item) {
+    if (FULL_TRACKS.has(item.Track)) return -1;
+    if (item._joints) return Math.min(...item._joints.map(t => TRACK_PRIORITY[t]));
+    return TRACK_PRIORITY[item.Track] ?? 99;
   }
 
   const mobileOrderMap = new Map();
@@ -151,7 +155,7 @@ function buildDay(day, items) {
         i++;
       }
       block.sort((a, b) => {
-        const pd = effectivePriority(a.Track) - effectivePriority(b.Track);
+        const pd = effectivePriority(a) - effectivePriority(b);
         return pd !== 0 ? pd : toMin(a.Time) - toMin(b.Time);
       });
       block.forEach(it => mobileOrderMap.set(it, mobIdx++));
@@ -173,78 +177,58 @@ function buildDay(day, items) {
   sorted.forEach(item => {
     const startMin = toMin(item.Time);
     const dur      = parseDur(item.Dur);
-    const endMin   = startMin + dur;
-    const rowStart = rowOf(startMin);
-    const rowEnd   = rowOf(endMin);
-    const rowCSS   = `grid-row: ${rowStart} / ${rowEnd};`;
+    const rowCSS   = `grid-row: ${rowOf(startMin)} / ${rowOf(startMin + dur)};`;
+    const track    = item.Track;
+    const isFull   = FULL_TRACKS.has(track);
+    const joints   = item._joints;
+    const chair    = isChair(item);
+    const order    = mobileOrderMap.get(item);
+    const hlClass  = item.Highlight === "yes" ? " sc-highlight" : "";
 
-    const track  = item.Track;
-    const isFull = FULL_TRACKS.has(track);
-    const joints = jointParts(track);
-    const chair  = isChair(item);
-    const isMute = track === "Break"
+    const sessHTML = (text, speaker) =>
+      `<span class="sess-title">${text}</span>${speaker ? `<span class="sess-chair">${speaker}</span>` : ""}`;
+    const text = chair ? item.Event.replace(/^session\s+\d+:\s*/i, "") : "";
 
-    // Session header strip
     if (chair) {
       if (joints) {
-        const sortedJoints = [...joints].sort((a, b) => TRACK_PRIORITY[a] - TRACK_PRIORITY[b]);
-        sortedJoints.forEach((t, idx) => {
-          const hdrEl = document.createElement("div");
-          hdrEl.className = `sess-hdr ${t.toLowerCase()}${idx > 0 ? " joint-secondary" : ""}`;
-          hdrEl.style.cssText = `${rowCSS} grid-column: ${TRACK_COL[t]};`;
-          hdrEl.style.order = mobileOrderMap.get(item);
-          const text = item.Event.replace(/^session\s+\d+:\s*/i, "");
-          hdrEl.innerHTML = `<span class="sess-title">${text}</span>${item.Speaker ? `<span class="sess-chair">${item.Speaker}</span>` : ""}`;
-          grid.appendChild(hdrEl);
-        });
+        const sortedJ = [...joints].sort((a, b) => TRACK_PRIORITY[a] - TRACK_PRIORITY[b]);
+        sortedJ.forEach((t, idx) => addEl(
+          `sess-hdr ${t.toLowerCase()}${idx > 0 ? " joint-secondary" : ""}`,
+          `${rowCSS} grid-column: ${TRACK_COL[t]};`, order,
+          sessHTML(text, item.Speaker)
+        ));
       } else {
         const jClass = isFull ? "full" : track.toLowerCase();
         const colCSS = isFull ? "grid-column: 2 / -1;" : `grid-column: ${TRACK_COL[track]};`;
-        const hdrEl = document.createElement("div");
-        hdrEl.className = `sess-hdr ${jClass}`;
-        hdrEl.style.cssText = rowCSS + colCSS;
-        hdrEl.style.order = mobileOrderMap.get(item);
-        const text = item.Event.replace(/^session\s+\d+:\s*/i, "");
-        hdrEl.innerHTML = `<span class="sess-title">${text}</span>${item.Speaker ? `<span class="sess-chair">${item.Speaker}</span>` : ""}`;
-        grid.appendChild(hdrEl);
+        addEl(`sess-hdr ${jClass}`, rowCSS + colCSS, order, sessHTML(text, item.Speaker));
       }
       return;
     }
 
-    // Full-width cards
     if (isFull) {
-      const cls = isMute ? "sc-mute" : "sc-plen";
-      const fullEl = document.createElement("div");
-      fullEl.className = `sc ${cls}${item.Highlight === "yes" ? " sc-highlight" : ""}`;
-      fullEl.style.cssText = `${rowCSS} grid-column: 2 / -1;`;
-      fullEl.style.order = mobileOrderMap.get(item);
-      fullEl.innerHTML = cardInnerHTML(item, null);
-      grid.appendChild(fullEl);
+      const cls = track === "Break" ? "sc-mute" : "sc-plen";
+      addEl(`sc ${cls}${hlClass}`, `${rowCSS} grid-column: 2 / -1;`, order, cardInnerHTML(item, null));
       return;
     }
 
-    // Joint track cards
     if (joints) {
-      const sortedJoints = [...joints].sort((a, b) => TRACK_PRIORITY[a] - TRACK_PRIORITY[b]);
-      sortedJoints.forEach((t, idx) => {
-        const jointEl = document.createElement("div");
-        jointEl.className = `sc sc-${t.toLowerCase()}${idx > 0 ? " joint-secondary" : ""}${item.Highlight === "yes" ? " sc-highlight" : ""}`;
-        const partner = sortedJoints.filter(p => p !== t)[0];
-        jointEl.style.cssText = `${rowCSS} grid-column: ${TRACK_COL[t]};`;
-        jointEl.style.order = mobileOrderMap.get(item);
-        jointEl.innerHTML = cardInnerHTML(item, partner);
-        grid.appendChild(jointEl);
+      const sortedJ = [...joints].sort((a, b) => TRACK_PRIORITY[a] - TRACK_PRIORITY[b]);
+      sortedJ.forEach((t, idx) => {
+        const partner = sortedJ.find(p => p !== t);
+        addEl(
+          `sc sc-${t.toLowerCase()}${idx > 0 ? " joint-secondary" : ""}${hlClass}`,
+          `${rowCSS} grid-column: ${TRACK_COL[t]};`, order,
+          cardInnerHTML(item, partner)
+        );
       });
       return;
     }
 
-    // Single track card
-    const singleEl = document.createElement("div");
-    singleEl.className = `sc sc-${track.toLowerCase()}${item.Highlight === "yes" ? " sc-highlight" : ""}`;
-    singleEl.style.cssText = `${rowCSS} grid-column: ${TRACK_COL[track]};`;
-    singleEl.style.order = mobileOrderMap.get(item);
-    singleEl.innerHTML = cardInnerHTML(item, null);
-    grid.appendChild(singleEl);
+    addEl(
+      `sc sc-${track.toLowerCase()}${hlClass}`,
+      `${rowCSS} grid-column: ${TRACK_COL[track]};`, order,
+      cardInnerHTML(item, null)
+    );
   });
 
   // Now-marker: red line showing current time
@@ -342,23 +326,23 @@ function assemblePage(data) {
   });
 
   // Live-update now-marker position every 60 s
-  setInterval(() => {
-    if (!nowMarkerInfo) return;
+  if (nowMarkerInfo) {
     const { el, timePoints } = nowMarkerInfo;
-    const now = getET().min;
-    if (now < timePoints[0] || now > timePoints[timePoints.length - 1]) {
-      el.style.display = "none";
-      return;
-    }
-    // Snap to largest timePoint ≤ current time
-    let bestRow = 1;
-    for (let i = 0; i < timePoints.length; i++) {
-      if (timePoints[i] <= now) bestRow = i + 1; else break;
-    }
-    el.style.gridRow = `${bestRow}`;
-    el.dataset.time = fmt(now);
-    el.style.display = "";
-  }, 60_000);
+    setInterval(() => {
+      const now = getET().min;
+      if (now < timePoints[0] || now > timePoints[timePoints.length - 1]) {
+        el.style.display = "none";
+        return;
+      }
+      let bestRow = 1;
+      for (let i = 0; i < timePoints.length; i++) {
+        if (timePoints[i] <= now) bestRow = i + 1; else break;
+      }
+      el.style.gridRow = `${bestRow}`;
+      el.dataset.time = fmt(now);
+      el.style.display = "";
+    }, 60_000);
+  }
 }
 
 // ── Entry point ───────────────────────────────────────────────────────────────

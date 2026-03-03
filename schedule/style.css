@@ -3,13 +3,17 @@
 :root {
   --cirms-blue: #001f4f;
   --background: #e2e8f5;
+  --text: #1e293b;
+  --muted: #94a3b8;
 
-  --plen-bg: #ffffff; --plen-border: #94a3b8; --plen-text: #1e293b;
+  --plen-bg: #ffffff; --plen-border: #94a3b8; --plen-text: var(--text);
   --high-bg: #ffffde; --high-border: #ffe734; --high-text: #907823;
 
   --mapp-bg: #eff6ff; --mapp-border: #6366f1; --mapp-text: #1e3a8a;
   --rphs-bg: #f0fdf4; --rphs-border: #16a34a; --rphs-text: #14532d;
   --rpme-bg: #ffefde; --rpme-border: #d97706; --rpme-text: #78350f;
+
+  --gutter-width: 52px
 }
 
 /* ── Base ───────────────────────────────────────────────────────────── */
@@ -17,7 +21,7 @@
 body {
   font-family: 'DM Sans', sans-serif;
   background: var(--background);
-  color: #1e293b;
+  color: var(--text);
 }
 
 /* ── Sticky band ─────────────────────────────────────────────────────── */
@@ -44,9 +48,10 @@ body {
   margin: 0;
 }
 .conf-header .conf-meta {
-  color: #94a3b8;
+  color: var(--muted);
   font-size: 1rem;
   margin-top: 0.3rem;
+  margin: 0
 }
 
 /* ── Tabs ────────────────────────────────────────────────────────────── */
@@ -79,9 +84,6 @@ body {
   font-weight: 600;
   border: none;
 }
-.nav-tabs .nav-link.active::after {
-  display: none;
-}
 
 /* ── Mobile day select ───────────────────────────────────────────────── */
 
@@ -97,7 +99,7 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.07em;
-  color: #94a3b8;
+  color: var(--muted);
   text-align: right;
   padding-right: 6px;
   flex-shrink: 0;
@@ -131,15 +133,11 @@ body {
 
 .track-header-row {
   display: grid;
-  grid-template-columns: 52px 1fr 1fr 1fr;
+  grid-template-columns: var(--gutter-width) 1fr 1fr 1fr;
   gap: 8px;
   padding: 6px 0 12px;
 }
 
-/* Per-pane track headers are always hidden (the visible one lives in .sticky-band) */
-.tab-pane .track-header-row {
-  display: none;
-}
 .track-col-hdr {
   text-align: center;
   padding: 0.6rem 0.25rem;
@@ -169,8 +167,8 @@ body {
 
 .schedule-grid {
   display: grid;
-  grid-template-columns: 52px 1fr 1fr 1fr;
-  column-gap: 6px;
+  grid-template-columns: var(--gutter-width) 1fr 1fr 1fr;
+  column-gap: 8px;
 }
 
 /* ── Time labels ─────────────────────────────────────────────────────── */
@@ -178,11 +176,10 @@ body {
 .time-lbl {
   font-family: 'DM Mono', monospace;
   font-size: 0.75rem;
-  color: #94a3b8;
+  color: var(--muted);
   text-align: right;
   padding-right: 6px;
   padding-top: 2px;
-  user-select: none;
   align-self: start;
   grid-column: 1;
 }
@@ -195,9 +192,7 @@ body {
   border-left: 3px solid transparent;
   font-size: 0.92rem;
   overflow: hidden;
-  margin: 1px;
   align-self: stretch;
-  min-height: 0;
   transition: box-shadow 0.15s;
 }
 .sc:hover {
@@ -240,7 +235,6 @@ body {
   color: var(--high-text) !important;
   border-left-color: var(--high-border) !important;
   border-left-width: 5px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
 }
 
 .sc-plen { background: var(--plen-bg); border-left-color: var(--plen-border); color: var(--plen-text); }
@@ -256,7 +250,6 @@ body {
   padding: 5px 11px;
   font-size: 0.82rem;
   font-weight: 500;
-  margin: 1px;
   align-self: stretch;
   display: flex;
   flex-direction: column;
@@ -285,7 +278,7 @@ body {
   font-size: 0.75rem;
   font-weight: 600;
   color: #ef4444;
-  width: 52px;
+  width: var(--gutter-width);
   text-align: right;
   padding-right: 6px;
   flex-shrink: 0;
