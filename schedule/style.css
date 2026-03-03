@@ -237,7 +237,15 @@ body {
 .sc-mapp { background: var(--mapp-bg); border-left-color: var(--mapp-border); color: var(--mapp-text); }
 .sc-rphs { background: var(--rphs-bg); border-left-color: var(--rphs-border); color: var(--rphs-text); }
 .sc-rpme { background: var(--rpme-bg); border-left-color: var(--rpme-border); color: var(--rpme-text); }
-.sc-mute { background: var(--plen-bg); border-left-color: var(--plen-border); color: var(--plen-text); opacity:0.6; }
+.sc-mute { background: var(--plen-bg); border-left-color: var(--plen-border); color: var(--plen-text); opacity:0.6;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 6px,
+    rgba(0,0,0,0.045) 6px,
+    rgba(0,0,0,0.045) 10px
+  );
+}
 
 /* ── Session header strip ────────────────────────────────────────────── */
 
