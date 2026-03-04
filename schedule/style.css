@@ -276,7 +276,7 @@ body {
    with a soft drop-shadow stripe on the leading edge of the right panel.   */
 .sess-hdr.joint-split {
   color: #fff;
-  padding-right: 22%;
+  padding-right: 26%;
   background:
     linear-gradient(105deg,
       transparent          75%,
@@ -352,7 +352,7 @@ body {
   .track-legend {
     display: flex;
     flex-wrap: wrap;
-    padding: 0.8rem 0 0.75rem;
+    padding: 0.4rem 0 0.75rem;
     font-size: 0.95rem;
     color: #475569;
   }
