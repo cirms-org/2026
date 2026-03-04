@@ -243,10 +243,9 @@ function buildDay(day, items) {
     // sessHTML: renders session header content.
     // For joint headers a "Joint · X" pill is shown right-aligned, using the
     // partner track's soft background and saturated border colour as text.
-    const sessHTML = (text, speaker, partnerTrack) =>
+    const sessHTML = (text, speaker) =>
       `<span class="sess-hdr-top">
         <span class="sess-title">${text}</span>
-        ${partnerTrack ? `<span class="sess-joint-badge" style="background:var(--${partnerTrack.toLowerCase()}-bg);color:var(--${partnerTrack.toLowerCase()}-border)">Joint&thinsp;·&thinsp;${partnerTrack}</span>` : ""}
       </span>
       ${speaker ? `<span class="sess-chair">${speaker}</span>` : ""}`;
 
@@ -258,15 +257,18 @@ function buildDay(day, items) {
         sortedJ.forEach((t, idx) => {
           const partner = sortedJ.find(p => p !== t);
           addEl(
-            `sess-hdr ${t.toLowerCase()}${idx > 0 ? " joint-secondary" : ""}`,
-            `${rowCSS} grid-column: ${TRACK_COL[t]};`, order,
-            sessHTML(text, item.Speaker, partner)
+            `sess-hdr joint-split${idx > 0 ? " joint-secondary" : ""}`,
+            `${rowCSS} grid-column: ${TRACK_COL[t]};` +
+            ` --left-color: var(--${t.toLowerCase()}-border);` +
+            ` --right-color: var(--${partner.toLowerCase()}-border);`,
+            order,
+            sessHTML(text, item.Speaker)
           );
         });
       } else {
         const jClass = isFull ? "full" : track.toLowerCase();
         const colCSS = isFull ? "grid-column: 2 / -1;" : `grid-column: ${TRACK_COL[track]};`;
-        addEl(`sess-hdr ${jClass}`, rowCSS + colCSS, order, sessHTML(text, item.Speaker, null));
+        addEl(`sess-hdr ${jClass}`, rowCSS + colCSS, order, sessHTML(text, item.Speaker));
       }
       return;
     }

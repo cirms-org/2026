@@ -272,21 +272,21 @@ body {
 .sess-hdr.rpme  { background: var(--rpme-border); color: #fff; }
 .sess-hdr.full  { background: #64748b; color: #fff; }
 
-/* Joint badge: soft track bg, saturated border colour as text, punch-through
-   inset shadow so it reads as carved into the header surface.              */
-.sess-joint-badge {
-  display: inline-flex;
-  align-items: center;
-  flex-shrink: 0;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  padding: 4px 7px 1px;
-  border-radius: 3px;
-  box-shadow:
-    inset 0 2px 3px rgba(0,0,0,0.5),
-    inset 0 1px 1px rgba(0,0,0,0.5);
+/* Joint session header: hard-edge diagonal split between two track colours,
+   with a soft drop-shadow stripe on the leading edge of the right panel.   */
+.sess-hdr.joint-split {
+  color: #fff;
+  padding-right: 22%;
+  background:
+    linear-gradient(105deg,
+      transparent          75%,
+      rgba(0,0,0,0.6)    75%,
+      rgba(0,0,0,0)      calc(75% + 8px)
+    ),
+    linear-gradient(105deg,
+      var(--left-color)  75%,
+      var(--right-color) 75%
+    );
 }
 
 /* ── Now marker (current-time line) ──────────────────────────────────── */
