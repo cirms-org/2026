@@ -33,6 +33,7 @@ const FULL_TRACKS = new Set(["Plen","Break","Photo","Train"]);
 const BASE_TRACKS = ["MApp","RPHS","RPME"];
 const TRACK_COL   = { MApp:2, RPHS:3, RPME:4 };   // grid columns (col 1 = time gutter)
 const DAY_LABELS  = { Mon:"Monday, April 13", Tue:"Tuesday, April 14", Wed:"Wednesday, April 15" };
+const DAY_LABELS_SHORT = { Mon:"Mon Apr 13", Tue:"Tue Apr 14", Wed:"Wed Apr 15" };
 const DAY_DATES   = { Mon:"2026-04-13",      Tue:"2026-04-14",      Wed:"2026-04-15" };
 
 // joint track → CSS class = highest-priority track in pair (MApp > RPHS > RPME)
@@ -396,7 +397,8 @@ function assemblePage(data) {
 
   DAYS.forEach((day, di) => {
     const items = data.filter(r => r.Day === day);
-    const label = DAY_LABELS[day] || day;
+    const label      = DAY_LABELS[day]       || day;
+    const labelShort = DAY_LABELS_SHORT[day] || day;
 
     // Tab button
     const btnId = `tab-btn-${day}`;
@@ -408,7 +410,7 @@ function assemblePage(data) {
       data-bs-toggle="tab" data-bs-target="#pane-${day}"
       type="button" role="tab"
       aria-controls="pane-${day}"
-      aria-selected="${di === 0}">${label}</button>`;
+      aria-selected="${di === 0}"><span class="day-label-full">${label}</span><span class="day-label-short">${labelShort}</span></button>`;
     tabsEl.appendChild(li);
 
     // Mobile select option

@@ -104,6 +104,8 @@ body {
 .day-select-mobile {
   display: none;
 }
+.day-label-short { display: none; }
+.day-label-full  { display: inline; }
 .day-tabs-desktop  {
   display: flex;
 }
@@ -380,24 +382,13 @@ body {
     display: flex !important;
   }
   .day-tabs-desktop {
-    display: none !important;
+    display: flex !important;
   }
   .day-select-mobile {
-    display: block;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #fff;
-    background: var(--cirms-blue);
-    border: none;
-    border-radius: 6px;
-    padding: 0.45rem 2rem 0.45rem 0.9rem;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.6rem center;
-    cursor: pointer;
+    display: none !important;
   }
+  .day-label-short { display: inline; }
+  .day-label-full  { display: none; }
   .schedule-grid {
     display: flex !important;
     flex-direction: column;
