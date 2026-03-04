@@ -340,9 +340,15 @@ body {
   display: none;
 }
 
+/* ── Print track header (injected by JS; hidden on screen) ──────────── */
+
+.print-track-hdr {
+  display: none;
+}
+
 /* ── Mobile ──────────────────────────────────────────────────────────── */
 
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .track-legend {
     display: flex;
     flex-wrap: wrap;
@@ -399,8 +405,8 @@ body {
   .time-lbl { display: none; }
   .sc, .sess-hdr {
     width: 100% !important;
-    grid-column: unset !important;
-    grid-row: unset !important;
+    grid-column: unset;
+    grid-row: unset;
     margin: 0;
     /* order is set per-element via JS (style.order) */
   }
@@ -416,4 +422,148 @@ body {
   .joint-secondary {
     display: none;
   }
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════
+   PRINT STYLES  —  US Letter, portrait
+   One day per page; colours preserved; screen chrome stripped.
+   ══════════════════════════════════════════════════════════════════════ */
+
+@media print {
+
+  /* ── Page canvas ──────────────────────────────────────────────────── */
+
+  @page {
+    size: letter portrait;
+    margin: 0.55in 0.5in 0.5in;
+  }
+
+  html {
+    margin: 0;
+  }
+
+  /* Force every browser to print backgrounds & colours */
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+  }
+
+  /* ── Global resets ────────────────────────────────────────────────── */
+
+  body {
+    background: #fff;
+    color: var(--text);
+  }
+
+  /* ── Hide screen-only chrome ──────────────────────────────────────── */
+
+  .sticky-band,
+  .now-marker,
+  .now-marker-extra {
+    display: none !important;
+  }
+
+  /* ── Show all day panes ───────────────────────────────────────────── */
+
+  .tab-pane {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* ── Day heading (injected via data attribute by JS) ──────────────── */
+
+  .tab-pane::before {
+    content: attr(data-print-label);
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--cirms-blue);
+    padding: 0.35rem 0 0.3rem;
+    border-bottom: 2px solid var(--cirms-blue);
+    margin-bottom: 0.4rem;
+  }
+
+  /* ── One day per page ─────────────────────────────────────────────── */
+
+  .tab-pane + .tab-pane {
+    break-before: page;
+  }
+
+  /* ── Keep cards whole across page breaks ──────────────────────────── */
+
+  .sc, .sess-hdr {
+    break-inside: avoid;
+  }
+
+  /* ── Full-width layout ────────────────────────────────────────────── */
+
+  .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  /* ── Title bar padding ────────────────────────────────────────────── */
+
+  .conf-header {
+    margin-left: calc(var(--gutter-width) + 8px);
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* ── Day label: indent to align with card columns, not time gutter ── */
+
+  .tab-pane::before {
+    margin-left: calc(var(--gutter-width) + 8px);
+  }
+
+  /* ── Reveal print track header ────────────────────────────────────── */
+
+  .print-track-hdr {
+    display: grid;
+    grid-template-columns: var(--gutter-width) 1fr 1fr 1fr;
+    gap: 8px;
+    padding: 4px 0 8px;
+    margin-bottom: 2px;
+  }
+
+  /* ── Tighten card & type sizes for print density ──────────────────── */
+
+  .sc {
+    padding: 5px 9px;
+    font-size: 0.85rem;
+  }
+
+  .sc-title {
+    font-size: 0.87rem;
+  }
+
+  .sc-time {
+    font-size: 0.72rem;
+  }
+
+  .sc-speaker,
+  .sc-affil {
+    font-size: 0.78rem;
+  }
+
+  .sess-hdr {
+    padding: 6px 9px 4px;
+    font-size: 0.8rem;
+  }
+
+  .track-col-hdr {
+    padding: 0.45rem 0.25rem;
+  }
+
+  .track-abbr {
+    font-size: 0.88rem;
+  }
+
+  .track-full-name {
+    font-size: 0.75rem;
+  }
+
 }

@@ -348,6 +348,17 @@ function buildDay(day, items) {
     });
   }
 
+  // Print track header — hidden on screen, shown by @media print
+  const printHdr = document.createElement("div");
+  printHdr.className = "print-track-hdr";
+  printHdr.innerHTML = `
+    <div></div>
+    <div class="track-col-hdr mapp"><span class="track-abbr">MApp</span><span class="track-full-name">Medical Applications</span></div>
+    <div class="track-col-hdr rphs"><span class="track-abbr">RPHS</span><span class="track-full-name">Radiation Protection &amp; Homeland Security</span></div>
+    <div class="track-col-hdr rpme"><span class="track-abbr">RPME</span><span class="track-full-name">Radiation Processing &amp; Material Effects</span></div>
+  `;
+
+  pane.appendChild(printHdr);
   pane.appendChild(grid);
   return pane;
 }
@@ -422,6 +433,7 @@ function assemblePage(data) {
     // Day pane
     const pane = buildDay(day, items);
     pane.setAttribute("aria-labelledby", btnId);
+    pane.dataset.printLabel = label;   // consumed by @media print ::before
     if (di === 0) pane.classList.add("show", "active");
     contentsEl.appendChild(pane);
   });
