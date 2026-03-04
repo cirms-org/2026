@@ -73,7 +73,7 @@ function cardInnerHTML(item) {
   const dur = parseDur(item.Dur);
   const durStr = (dur && !/adjourn/i.test(item.Event)) ? ` · ${dur} min` : "";
   return `
-    <div class="sc-time">${item.Time}${durStr}</div>
+    <div class="sc-time"><span class="sc-time-val">${item.Time}</span>${durStr}</div>
     <div class="sc-title">${item.Event}</div>
     ${item.Speaker ? `<div class="sc-speaker">${item.Speaker}${item.Affil ? ` &nbsp;·&nbsp; <span class="sc-affil">${item.Affil}</span>` : ""}</div>` : ""}
   `;

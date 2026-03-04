@@ -174,7 +174,9 @@ body {
 .time-lbl {
   font-family: 'DM Mono', monospace;
   font-size: 0.75rem;
-  color: var(--muted);
+  color: var(--text);
+  opacity: 0.5;
+  font-weight: 600;
   text-align: right;
   padding-right: 6px;
   padding-top: 2px;
@@ -401,6 +403,13 @@ body {
     grid-row: unset !important;
     margin: 0;
     /* order is set per-element via JS (style.order) */
+  }
+
+  /* darken just the time value inside cards — no time gutter on mobile */
+  .sc-time-val {
+    opacity: 1;
+    font-weight: 600;
+    color: var(--text);
   }
 
   /* hide duplicate joint cards on mobile */
