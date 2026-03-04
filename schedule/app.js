@@ -1,4 +1,4 @@
-// render.js — CIRMS Conference Schedule Viewer
+// app.js — CIRMS Conference Schedule Viewer
 //
 // Parses a CSV schedule and renders it as a responsive, tabbed three-track
 // grid.
