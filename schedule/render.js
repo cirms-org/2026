@@ -19,8 +19,8 @@
 
 // ── Debug ─────────────────────────────────────────────────────────────────────
 
-const DEBUG_DAY   = "Mon";   // "Mon"/"Tue"/"Wed" to test now-marker with today's clock; null for production
-const DEBUG_TIME  = "14:10"; // "HH:MM" to override current time; null for production
+const DEBUG_DAY  = null // "Mon";   // "Mon"/"Tue"/"Wed" to test now-marker with today's clock; null for production
+const DEBUG_TIME = null //"14:10"; // "HH:MM" to override current time; null for production
 
 // ── Config ────────────────────────────────────────────────────────────────────
 
