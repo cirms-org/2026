@@ -17,6 +17,10 @@
 // rather than cards. The CSV parser handles quoted fields but not escaped
 // quotes — sufficient for the controlled input this schedule uses.
 
+// ── Modules ───────────────────────────────────────────────────────────────────
+
+import TinyGesture from 'https://cdn.jsdelivr.net/npm/tinygesture@3.0.0/+esm';
+
 // ── Debug ─────────────────────────────────────────────────────────────────────
 
 const DEBUG_DAY  = null // "Mon";   // "Mon"/"Tue"/"Wed" to test now-marker with today's clock; null for production
@@ -453,6 +457,25 @@ function assemblePage(data) {
       extraEls.forEach(x => { x.dataset.time = t; x.style.display = ""; });
     }, 60_000);
   }
+
+  // Swipe left/right to navigate between days
+  const gesture = new TinyGesture(contentsEl);
+  gesture.on('swipeleft', () => {
+    const active = contentsEl.querySelector('.tab-pane.active');
+    if (!active) return;
+    const next = DAYS[DAYS.indexOf(active.id.replace('pane-', '')) + 1];
+    if (next) bootstrap.Tab.getOrCreateInstance(
+      document.querySelector(`[data-bs-target="#pane-${next}"]`)
+    ).show();
+  });
+  gesture.on('swiperight', () => {
+    const active = contentsEl.querySelector('.tab-pane.active');
+    if (!active) return;
+    const prev = DAYS[DAYS.indexOf(active.id.replace('pane-', '')) - 1];
+    if (prev) bootstrap.Tab.getOrCreateInstance(
+      document.querySelector(`[data-bs-target="#pane-${prev}"]`)
+    ).show();
+  });
 }
 
 // ── Entry point ───────────────────────────────────────────────────────────────
