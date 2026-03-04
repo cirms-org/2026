@@ -454,6 +454,7 @@ body {
   body {
     background: #fff;
     color: var(--text);
+    zoom: 0.72;
   }
 
   /* ── Hide screen-only chrome ──────────────────────────────────────── */
@@ -509,14 +510,16 @@ body {
 
   .conf-header {
     margin-left: calc(var(--gutter-width) + 8px);
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-top: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 
   /* ── Day label: indent to align with card columns, not time gutter ── */
 
   .tab-pane::before {
     margin-left: calc(var(--gutter-width) + 8px);
+    font-size: 1.6rem;
   }
 
   /* ── Reveal print track header ────────────────────────────────────── */
@@ -552,6 +555,7 @@ body {
   .sess-hdr {
     padding: 6px 9px 4px;
     font-size: 0.8rem;
+    break-after: avoid;
   }
 
   .track-col-hdr {
@@ -564,6 +568,19 @@ body {
 
   .track-full-name {
     font-size: 0.75rem;
+  }
+
+  /* Use system fonts to avoid embedding web fonts in the PDF */
+  body, .sc, .sess-hdr, .conf-header, .track-col-hdr {
+    font-family: system-ui, sans-serif;
+  }
+  .sc-time, .time-lbl, .now-marker::before {
+    font-family: ui-monospace, monospace;
+  }
+
+  .sc-mute {
+    background-image: none;
+    background-color: #f1f5f9;
   }
 
 }
