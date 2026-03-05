@@ -167,9 +167,27 @@ body {
   align-items: center;
   gap: 2px;
 }
-.input-punct-wrap .blank-input {
+.input-wrap {
+  position: relative;
   flex: 1;
 }
+.input-wrap .blank-input {
+  width: 100%;
+}
+.char-countdown {
+  position: absolute;
+  top: -1.6em;
+  right: 2px;
+  font-size: 0.78rem;
+  font-family: 'DM Mono', monospace;
+  color: var(--muted);
+  opacity: 0;
+  transition: opacity 0.2s, color 0.2s;
+  pointer-events: none;
+}
+.char-countdown.visible        { opacity: 1; }
+.char-countdown.low            { color: #f59e0b; }
+.char-countdown.critical       { color: #e11d48; font-weight: 600; }
 .punct { font-size: 1.4rem; font-weight: 400; color: #475569; line-height: 1; padding-bottom: 2px; flex-shrink: 0; }
 .punct-invisible { visibility: hidden; }
 

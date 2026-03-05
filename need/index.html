@@ -20,10 +20,7 @@
 <div class="container main-content">
 
   <div class="instruction">
-    Complete the sentence below to describe <strong>one specific measurement need</strong> in your area.
-    Name the exact standard, reference material, or traceability pathway that is missing, and the
-    specific work it is blocking. Please download the slide as a PNG image, and insert it as the
-    <strong>first content slide</strong> of your presentation. Responses feed the CIRMS needs report.
+    Complete the sentence below to describe <strong>one specific measurement need</strong> in your area. Name the exact standard, reference material, or traceability pathway that is missing, and the specific work it is blocking. Your inputs are <strong>not&nbsp;saved.</strong> This generator only produces a PNG image. Please insert it as the <strong>first content slide</strong> of your deck, it will be used to inform the CIRMS annual needs report.
   </div>
 
   <!-- ── Sentence form ─────────────────────────────────────────────── -->
@@ -32,25 +29,34 @@
 
       <span class="sentence-frag">Progress in</span>
       <div class="input-punct-wrap">
-        <input class="blank-input" id="f-area" type="text" maxlength="90"
-               placeholder="e.g. biological dosimetry for mass casualty triage"
-               autocomplete="off" spellcheck="false">
+        <div class="input-wrap">
+          <input class="blank-input" id="f-area" type="text" maxlength="90"
+                 placeholder="e.g. biological dosimetry for mass casualty triage"
+                 autocomplete="off">
+          <span class="char-countdown" id="cd-area">90</span>
+        </div>
         <span class="punct punct-invisible">.</span>
       </div>
 
       <span class="sentence-frag">is currently blocked because we lack</span>
       <div class="input-punct-wrap">
-        <input class="blank-input" id="f-standard" type="text" maxlength="80"
-               placeholder="e.g. a validated reference dose-response library for γ-H2AX and dicentric assays"
-               autocomplete="off" spellcheck="false">
+        <div class="input-wrap">
+          <input class="blank-input" id="f-standard" type="text" maxlength="80"
+                 placeholder="e.g. a validated reference dose-response library for γ-H2AX and dicentric assays"
+                 autocomplete="off">
+          <span class="char-countdown" id="cd-standard">80</span>
+        </div>
         <span class="punct"> ,</span>
       </div>
 
       <span class="sentence-frag">which prevents</span>
       <div class="input-punct-wrap">
-        <input class="blank-input" id="f-capability" type="text" maxlength="90"
-               placeholder="e.g. rapid population exposure screening after a radiological incident"
-               autocomplete="off" spellcheck="false">
+        <div class="input-wrap">
+          <input class="blank-input" id="f-capability" type="text" maxlength="90"
+                 placeholder="e.g. rapid population exposure screening after a radiological incident"
+                 autocomplete="off">
+          <span class="char-countdown" id="cd-capability">90</span>
+        </div>
         <span class="punct"> .</span>
       </div>
 

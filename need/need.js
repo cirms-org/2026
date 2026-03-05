@@ -185,8 +185,17 @@ function renderSlide() {
 
 // ── Input listeners ───────────────────────────────────────────────────────────
 
-['f-area', 'f-standard', 'f-capability'].forEach(id => {
-  document.getElementById(id).addEventListener('input', renderSlide);
+[['f-area','cd-area',90],['f-standard','cd-standard',80],['f-capability','cd-capability',90]].forEach(([id, cdId, max]) => {
+  const input = document.getElementById(id);
+  const cd    = document.getElementById(cdId);
+  input.addEventListener('input', () => {
+    const rem = max - input.value.length;
+    cd.textContent = rem;
+    cd.classList.toggle('visible',   input.value.length > 0);
+    cd.classList.toggle('low',       rem <= 20 && rem > 5);
+    cd.classList.toggle('critical',  rem <= 5);
+    renderSlide();
+  });
 });
 
 // ── Download ──────────────────────────────────────────────────────────────────
