@@ -194,7 +194,7 @@ function renderSlide() {
 document.getElementById('btnDownload').addEventListener('click', () => {
   renderSlide();
   const a    = document.createElement('a');
-  a.download = 'CIRMS2026_Need.png';
+  a.download = 'CIRMS-2026-Need.png';
   a.href     = canvas.toDataURL('image/png');
   a.click();
 });
