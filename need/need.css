@@ -1,0 +1,191 @@
+/* ── Variables — mirror schedule.css ────────────────────────────────── */
+
+:root {
+  --cirms-blue:  #001f4f;
+  --background:  #e2e8f5;
+  --text:        #1e293b;
+  --muted:       #94a3b8;
+  --high-bg:     #ffffde;
+  --high-border: #b8940a;
+  --high-text:   #907823;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--background);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ── Header — identical to schedule ─────────────────────────────────── */
+
+.conf-header {
+  background: var(--cirms-blue);
+  color: #fff;
+  padding: 1rem 0 1.4rem;
+}
+.conf-header h1 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+.conf-header .conf-meta {
+  color: var(--muted);
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* ── Layout ──────────────────────────────────────────────────────────── */
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.main-content { padding: 2rem 0 3.5rem; }
+
+/* ── Instruction banner ──────────────────────────────────────────────── */
+
+.instruction {
+  background: #f1f5fb;
+  border-left: 4px solid var(--cirms-blue);
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.25rem;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #334155;
+}
+.instruction strong { color: var(--cirms-blue); }
+
+/* ── Sentence form card ──────────────────────────────────────────────── */
+
+.need-form {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.75rem 2rem 2.25rem;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.09);
+  margin-bottom: 2rem;
+}
+
+/* Vertical form: connective text + full-width input, stacked */
+.sentence-builder {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-size: 1.12rem;
+  color: #475569;
+  font-weight: 400;
+}
+
+.sentence-frag { line-height: 1.4; }
+
+.blank-input {
+  display: block;
+  width: 100%;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--high-text);
+  background: var(--high-bg);
+  border: 1.5px solid var(--high-border);
+  border-radius: 5px;
+  padding: 8px 14px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.blank-input:focus {
+  border-color: var(--cirms-blue);
+  box-shadow: 0 0 0 3px rgba(0,31,79,0.13);
+}
+.blank-input::placeholder {
+  color: var(--high-border);
+  opacity: 0.65;
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* ── Slide preview ───────────────────────────────────────────────────── */
+
+.preview-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+.preview-wrapper {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 28px rgba(0,0,0,0.18);
+  background: #fff;
+  margin-bottom: 1.75rem;
+  line-height: 0; /* kill baseline gap under canvas */
+}
+#slidePreview {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ── Download button ─────────────────────────────────────────────────── */
+
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--cirms-blue);
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.7rem 1.75rem;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  letter-spacing: -0.01em;
+  transition: background 0.15s, transform 0.1s;
+}
+.btn-download:hover  { background: #002d70; }
+.btn-download:active { transform: scale(0.98); }
+
+.download-note {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 0.55rem;
+  line-height: 1.5;
+}
+
+/* ── Punctuation wrapper ─────────────────────────────────────────────── */
+
+.input-punct-wrap {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.input-punct-wrap .blank-input {
+  flex: 1;
+}
+.punct { font-size: 1.4rem; font-weight: 400; color: #475569; line-height: 1; padding-bottom: 2px; flex-shrink: 0; }
+.punct-invisible { visibility: hidden; }
+
+/* ── Mobile ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 600px) {
+  .conf-header h1       { font-size: 1.5rem; }
+  .conf-header .conf-meta { font-size: 0.88rem; }
+  .container            { padding: 0 1rem; }
+  .main-content         { padding: 1.25rem 0 2.5rem; }
+  .instruction          { font-size: 0.88rem; padding: 0.85rem 1rem; margin-bottom: 1.25rem; }
+  .need-form            { padding: 1.25rem 1rem 1rem; margin-bottom: 1.25rem; }
+  .sentence-builder     { font-size: 0.95rem; gap: 0.4rem; }
+  .blank-input          { font-size: 0.95rem; padding: 7px 10px; }
+  .punct                { font-size: 1.2rem; }
+  .preview-label        { font-size: 0.68rem; }
+  .btn-download         { font-size: 0.92rem; padding: 0.65rem 1.25rem; width: 100%; justify-content: center; }
+  .download-note        { font-size: 0.78rem; }
+}

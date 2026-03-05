@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CIRMS 2026 — Need</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+  <link href="need.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ── Header — same markup pattern as schedule ──────────────────────── -->
+<header class="conf-header">
+  <div class="container">
+    <h1>CIRMS 2026 — Need</h1>
+    <p class="conf-meta">Annual Meeting &nbsp;·&nbsp; April 13–15, 2026</p>
+  </div>
+</header>
+
+<div class="container main-content">
+
+  <div class="instruction">
+    Complete the sentence below to describe <strong>one specific measurement need</strong> in your area.
+    Name the exact standard, reference material, or traceability pathway that is missing, and the
+    specific work it is blocking. Your slide will be downloaded as a PNG — insert it as the
+    <strong>first slide</strong> of your presentation. Responses feed the CIRMS annual needs report.
+  </div>
+
+  <!-- ── Sentence form ─────────────────────────────────────────────── -->
+  <div class="need-form">
+    <div class="sentence-builder">
+
+      <span class="sentence-frag">Progress in</span>
+      <div class="input-punct-wrap">
+        <input class="blank-input" id="f-area" type="text" maxlength="60"
+               placeholder="e.g. biological dosimetry for mass casualty triage"
+               autocomplete="off" spellcheck="false">
+        <span class="punct punct-invisible">.</span>
+      </div>
+
+      <span class="sentence-frag">is currently blocked because we lack</span>
+      <div class="input-punct-wrap">
+        <input class="blank-input" id="f-standard" type="text" maxlength="60"
+               placeholder="e.g. a validated reference dose-response library for γ-H2AX and dicentric assays"
+               autocomplete="off" spellcheck="false">
+        <span class="punct"> ,</span>
+      </div>
+
+      <span class="sentence-frag">which prevents</span>
+      <div class="input-punct-wrap">
+        <input class="blank-input" id="f-capability" type="text" maxlength="60"
+               placeholder="e.g. rapid population exposure screening after a radiological incident"
+               autocomplete="off" spellcheck="false">
+        <span class="punct"> .</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Slide preview ─────────────────────────────────────────────── -->
+  <div class="preview-label">Slide Preview — 1920 × 1080 px</div>
+  <div class="preview-wrapper">
+    <canvas id="slidePreview"></canvas>
+  </div>
+
+  <!-- ── Download ──────────────────────────────────────────────────── -->
+  <button class="btn-download" id="btnDownload">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/>
+      <line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+    Download Slide as PNG
+  </button>
+  <p class="download-note">
+    Insert the downloaded image as the first slide of your deck.<br>
+    Works in PowerPoint, Keynote, Google Slides, and LibreOffice Impress.
+  </p>
+
+</div>
+
+<script src="need.js"></script>
+</body>
+</html>
