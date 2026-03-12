@@ -9,7 +9,7 @@ Mon,Break,10:15,0:15,Health break,,,
 Mon,Plen,10:30,0:30,"Plenary 1: Cobalt-60 and Gamma applications: Effective, understood, growing, and sustainable",Richard Weins,Nordion,
 Mon,Plen,11:00,0:30,Plenary 2: Thermal therapy,Dario Rodrigues,University of Maryland Medical Center,
 Mon,Plen,11:30,0:30,Poster blitz 1,,,yes
-Mon,Plen,12:00,0:30,Poster session,,,yes
+Mon,Plen,12:00,0:30,Poster viewing session,,,yes
 Mon,Break,12:30,1:00,Lunch — Caswell lunch,,,
 Mon,RPHS-RPME,13:30,0:10,Session 1: Radiation Applications,Ileana Pazos,,
 Mon,RPHS-RPME,13:40,0:20,Dose uniformity ratio changes due to device movement in radiation sterilization,Tobias Funk,Triple Ring Technologies,
@@ -39,8 +39,9 @@ Tue,Plen,9:10,0:30,Keynote: Commonwealth fusion systems ,Andrea Saltos,CFS,yes
 Tue,Plen,9:40,0:30,Plenary 3: Innovative dosimetry and safe nuclear waste management: Building trust through science and precision,Robert Hayes,North Carolina State University,
 Tue,Break,10:10,0:20,Health break,,,
 Tue,Plen,10:30,0:30,Plenary 4: Investigating the FLASH effect with Monte Carlo simulations,Jan Schuemann,Massachusetts General Hospital and Harvard Medical School,
-Tue,Plen,11:00,0:30,Poster blitz 2,,,yes
-Tue,Plen,11:30,1:00,Needs working groups,,,yes
+Tue,Plen,11:00,0:30,Needs working groups,,,yes
+Tue,Plen,11:30,0:30,Poster blitz 2,,,yes
+Tue,Plen,12:00,0:30,Poster viewing session,,,
 Tue,Break,12:30,1:30,Lunch — Mentoring session,,,
 Tue,Photo,14:00,0:30,Group photo,,,yes
 Tue,Plen,14:30,0:30,Randall S. Caswell Award,Nolan Hertel,Georgia Institute of Technology,yes
@@ -63,9 +64,9 @@ Wed,Plen,9:15,0:30,Marshall R. Cleland Award and Essay Award,Tony Berejka,,yes
 Wed,Plen,9:45,0:30,Randall S. Caswell Award,Mark Driscoll,SUNY,yes
 Wed,Break,10:15,0:15,Health break,,,
 Wed,Plen,10:30,0:15,Plenary 5: Biodosimetry: A tribute to Dr Miral Dizdaroglu,Amitava Adhikary,University of Iowa,
-Wed,Plen,10:45,0:15,Plenary 6: Development of METREPOL-based triage algorithms for estimating H-ARS severity and radiation dose in a baboon mixed-field radiation model,David L. Bolduc,AFRRI ,
-Wed,Plen,11:00,0:25,Plenary 7: Biodosimetry at NIST,Joey Robertson,NIST,
-Wed,Plen,11:25,0:25,Plenary 8: TBD,Steven Swarts,University of Florida,
+Wed,Plen,10:45,0:15,Plenary 6:  Impact of the pioneering work of Miral Dizdaroglu in identifying and quantifying DNA base damage on the advancements in understanding the radiation chemistry of DNA,Steven Swarts,University of Florida,
+Wed,Plen,11:00,0:25,Plenary 7: Biodosimetry at NIST: A tribute to Miral Dizdaroglu,Joey Robertson,NIST,
+Wed,Plen,11:25,0:25,Plenary 8: Development of METREPOL-based triage algorithms for estimating H-ARS severity and radiation dose in a baboon mixed-field radiation model,David L. Bolduc,AFRRI ,
 Wed,Plen,11:50,0:30,Capstone: TBD,,,yes
 Wed,Plen,12:20,0:15,Needs Report,Shaheen Dewji,Georgia Institute of Technology,
 Wed,Plen,12:35,0:10,President's closing remarks and farewell,Cody Wilson,IBA Industrial,
