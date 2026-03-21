@@ -1,4 +1,4 @@
-﻿Day,Track,Time,Duration,Title,Speaker,Affiliation,Star
+Day,Track,Time,Duration,Title,Speaker,Affiliation,Star
 Mon,Break,8:00,0:15,Registration,,,
 Mon,Break,8:15,0:45,Breakfast,,,
 Mon,Plen,9:00,0:15,President's Welcome,Cody Wilson,IBA Industrial,
@@ -44,7 +44,7 @@ Tue,Plen,11:30,0:30,Poster blitz 2,,,yes
 Tue,Plen,12:00,0:30,Poster viewing session,,,yes
 Tue,Break,12:30,1:30,Lunch — Mentoring session,,,
 Tue,Photo,14:00,0:30,Group photo,,,yes
-Tue,Plen,14:30,0:30,Randall S. Caswell Award,Nolan Hertel,Georgia Institute of Technology,yes
+Tue,Plen,14:30,0:30,Randall S. Caswell Award,Mark Driscoll,SUNY,yes
 Tue,Break,15:00,0:30,Health Break,,,
 Tue,RPHS-MApp,15:30,0:10,Session 3: OSL Dosimetry Alternatives,Wes Culberson,,
 Tue,RPHS-MApp,15:40,0:20,Needs,,,
@@ -61,7 +61,7 @@ Tue,Break,18:00,,Adjourn,,,
 Wed,Break,8:00,1:00,Breakfast,,,
 Wed,Plen,9:00,0:15,President's Welcome,Cody Wilson,IBA Industrial,
 Wed,Plen,9:15,0:30,Marshall R. Cleland Award and Essay Award,Tony Berejka,,yes
-Wed,Plen,9:45,0:30,Randall S. Caswell Award,Mark Driscoll,SUNY,yes
+Wed,Plen,9:45,0:30,Randall S. Caswell Award,Nolan Hertel,Georgia Institute of Technology,yes
 Wed,Break,10:15,0:15,Health break,,,
 Wed,Plen,10:30,0:15,Plenary 5: From hydroxyl radicals to clustered DNA lesions: Integrating track-structure physics with quantitative radiation damage measurements,Amitava Adhikary,University of Iowa,
 Wed,Plen,10:45,0:25,Plenary 6:  Impact of the pioneering work of Miral Dizdaroglu in identifying and quantifying DNA base damage on the advancements in understanding the radiation chemistry of DNA,Steven Swarts,University of Florida,
