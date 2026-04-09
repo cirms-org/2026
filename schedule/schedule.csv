@@ -1,4 +1,4 @@
-Day,Track,Time,Duration,Title,Speaker,Affiliation,Star
+﻿Day,Track,Time,Duration,Title,Speaker,Affiliation,Highlight
 Mon,Break,8:00,0:15,Registration,,,
 Mon,Break,8:15,0:45,Breakfast,,,
 Mon,Plen,9:00,0:15,President's Welcome,Cody Wilson,IBA Industrial,
@@ -41,7 +41,7 @@ Tue,Break,10:10,0:20,Health break,,,
 Tue,Plen,10:30,0:30,Plenary 4: Investigating the FLASH effect with Monte Carlo simulations,Jan Schuemann,Massachusetts General Hospital and Harvard Medical School,
 Tue,Plen,11:00,0:20,Marshall R. Cleland Award and Radiation Technology Essay Award,John Logar,,yes
 Tue,Plen,11:20,0:20,Scientific Exchange Discussion,John Logar,,yes
-Tue,Plen,11:40,0:30,Randall S. Caswell Award,Mark Driscoll,,yes
+Tue,Plen,11:40,0:30,Randall S. Caswell Award,Mark Driscoll,SUNY,yes
 Tue,Plen,12:10,0:30,Needs working groups,,,yes
 Tue,Break,12:40,1:30,Lunch — Mentoring session,,,
 Tue,Plen,14:10,0:30,Poster blitz 2,,,yes
@@ -56,7 +56,7 @@ Tue,RPME,15:30,0:10,Session 3: Radiation Modality Comparisons,Spencer Mickum,,
 Tue,RPME,15:40,0:20,"Latest efforts of an international collaborative team studying differences in effects for gamma, e-beam and x-ray irradiation applications",Leo Fifield,PNNL,
 Tue,RPME,16:00,0:20,Performance of X-ray vs. gamma irradiators,Joshua Nuzzi,IBA Industrial,
 Tue,RPME,16:20,0:20,Investigating the use of alanine-based chip cards for emergency personal dosimetry following ionizing radiation exposures,Joel Beazley,University of Oxford,
-Tue,RPME,16:40,0:20,TBD,,,
+Tue,RPME,16:40,0:20,Perspective on Cesium-137 Supply,Zach Hope,Hopewell Designs,
 Tue,Plen,17:00,1:00,CIRMS reception,,,yes
 Tue,Break,18:00,,Adjourn,,,
 Wed,Break,8:00,1:00,Breakfast,,,

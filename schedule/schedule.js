@@ -395,7 +395,7 @@ function parseCSV(text) {
       Event:     row["Title"]       || row["Event"] || "",
       Speaker:   row["Speaker"]     || "",
       Affil:     row["Affiliation"] || "",
-      Highlight: row["Star"] && row["Star"].trim().toLowerCase() === "yes" ? "yes" : "",
+      Highlight: row["Highlight"] && row["Highlight"].trim().toLowerCase() === "yes" ? "yes" : "",
     };
   }).filter(r => r.Day);
 }
