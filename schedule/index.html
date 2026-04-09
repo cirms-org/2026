@@ -33,9 +33,18 @@
   function printSchedule(compact) {
     if (compact) document.body.classList.add('print-compact');
     else         document.body.classList.remove('print-compact');
+    // @page can't be scoped to a CSS class, so inject a temporary
+    // <style> for compact's A4 page size and remove it after printing.
+    const pageStyle = compact ? (() => {
+      const s = document.createElement('style');
+      s.textContent = '@media print { @page { size: A4 portrait; } }';
+      document.head.appendChild(s);
+      return s;
+    })() : null;
     window.print();
     window.addEventListener('afterprint', () => {
       document.body.classList.remove('print-compact');
+      if (pageStyle) pageStyle.remove();
     }, { once: true });
   }
 </script>

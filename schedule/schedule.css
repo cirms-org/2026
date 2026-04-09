@@ -670,4 +670,11 @@ body {
     row-gap: 3px;
   }
 
+  /* Bump speaker/affiliation up to match the title size for legibility */
+  body.print-compact .sc-speaker,
+  body.print-compact .sc-affil {
+    font-size: 0.87rem;
+    opacity: 0.9;
+  }
+
 }
