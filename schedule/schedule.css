@@ -425,6 +425,47 @@ body {
 }
 
 
+/* ── Print buttons (screen only) ────────────────────────────────────── */
+
+.conf-header-inner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.print-buttons {
+  display: flex;
+  gap: 0.5rem;
+  padding-bottom: 0.15rem;
+  flex-shrink: 0;
+}
+
+.print-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.38rem 0.85rem;
+  border-radius: 6px;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+.print-btn:hover {
+  background: rgba(255,255,255,0.2);
+  border-color: rgba(255,255,255,0.6);
+}
+.print-btn-compact {
+  border-style: dashed;
+}
+
 /* ══════════════════════════════════════════════════════════════════════
    PRINT STYLES  —  US Letter, portrait
    One day per page; colours preserved; screen chrome stripped.
@@ -581,6 +622,52 @@ body {
   .sc-mute {
     background-image: none;
     background-color: #f1f5f9;
+  }
+
+  /* ── Always hide screen-only print buttons ────────────────────────── */
+
+  .print-buttons {
+    display: none !important;
+  }
+
+  /* ── Joint session headers: drop the semi-transparent shadow overlay ──
+     Print engines composite multiple background-image layers poorly —
+     rgba(0,0,0,0.6) renders opaque and smothers the right-panel colour.
+     Replace with a plain hard-edge two-colour gradient.               ── */
+
+  .sess-hdr.joint-split {
+    background: linear-gradient(
+      105deg,
+      var(--left-color)  75%,
+      var(--right-color) 75%
+    ) !important;
+  }
+
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════
+   COMPACT PRINT MODE  —  triggered by body.print-compact
+   Drops the time/duration line from every speaker card, trims padding,
+   and tightens row gaps to fit 2.5 days on a two-sided Letter sheet.
+   ══════════════════════════════════════════════════════════════════════ */
+
+@media print {
+
+  body.print-compact .sc-time {
+    display: none;
+  }
+
+  body.print-compact .sc {
+    padding: 3px 9px 4px;
+  }
+
+  body.print-compact .sess-hdr {
+    padding: 4px 9px 3px;
+  }
+
+  body.print-compact .schedule-grid {
+    row-gap: 3px;
   }
 
 }
