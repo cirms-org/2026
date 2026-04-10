@@ -349,6 +349,10 @@ body {
 /* ── Mobile ──────────────────────────────────────────────────────────── */
 
 @media screen and (max-width: 767px) {
+  .print-buttons {
+    display: none;
+  }
+
   .track-legend {
     display: flex;
     flex-wrap: wrap;
