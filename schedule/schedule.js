@@ -72,8 +72,11 @@ let nowMarkerInfo = null;  // { el, timePoints } — at most one marker across a
 function cardInnerHTML(item) {
   const dur = parseDur(item.Dur);
   const durStr = (dur && !/adjourn/i.test(item.Event)) ? ` · ${dur} min` : "";
+  const pdfIcon = item.Abstract
+    ? `<span class="sc-pdf-icon" title="View abstract (PDF)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>`
+    : "";
   return `
-    <div class="sc-time"><span class="sc-time-val">${item.Time}</span>${durStr}</div>
+    <div class="sc-time"><span class="sc-time-val">${item.Time}</span>${durStr}${pdfIcon}</div>
     <div class="sc-title">${item.Event}</div>
     ${item.Speaker ? `<div class="sc-speaker">${item.Speaker}${item.Affil ? ` &nbsp;·&nbsp; <span class="sc-affil">${item.Affil}</span>` : ""}</div>` : ""}
   `;
@@ -118,12 +121,26 @@ function buildDay(day, items) {
   grid.style.rowGap = "5px";
 
   // Helper: create, style, and append a div to the grid
-  function addEl(cls, css, order, html) {
+  function addEl(cls, css, order, html, abstract) {
     const el = document.createElement("div");
     el.className = cls;
     el.style.cssText = css;
     el.style.order = order;
     el.innerHTML = html;
+    if (abstract) {
+      el.classList.add("sc-linked");
+      el.setAttribute("role", "link");
+      el.setAttribute("tabindex", "0");
+      el.addEventListener("click", () => {
+        window.open(`/2026/abstracts/presentations/abstract-${abstract}.pdf`, "_blank");
+      });
+      el.addEventListener("keydown", e => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          window.open(`/2026/abstracts/presentations/abstract-${abstract}.pdf`, "_blank");
+        }
+      });
+    }
     grid.appendChild(el);
   }
 
@@ -275,7 +292,7 @@ function buildDay(day, items) {
 
     if (isFull) {
       const cls = track === "Break" ? "sc-mute" : "sc-plen";
-      addEl(`sc ${cls}${hlClass}`, `${rowCSS} grid-column: 2 / -1;`, order, cardInnerHTML(item));
+      addEl(`sc ${cls}${hlClass}`, `${rowCSS} grid-column: 2 / -1;`, order, cardInnerHTML(item), item.Abstract);
       return;
     }
 
@@ -290,7 +307,8 @@ function buildDay(day, items) {
           `sc sc-${t.toLowerCase()} sc-joint${idx > 0 ? " joint-secondary" : ""}${hlClass}`,
           `${rowCSS} grid-column: ${TRACK_COL[t]}; --partner-border-color: var(--${partner.toLowerCase()}-border);`,
           order,
-          cardInnerHTML(item)
+          cardInnerHTML(item),
+          item.Abstract
         );
       });
       return;
@@ -299,7 +317,8 @@ function buildDay(day, items) {
     addEl(
       `sc sc-${track.toLowerCase()}${hlClass}`,
       `${rowCSS} grid-column: ${TRACK_COL[track]};`, order,
-      cardInnerHTML(item)
+      cardInnerHTML(item),
+      item.Abstract
     );
   });
 
@@ -396,6 +415,7 @@ function parseCSV(text) {
       Speaker:   row["Speaker"]     || "",
       Affil:     row["Affiliation"] || "",
       Highlight: row["Highlight"] && row["Highlight"].trim().toLowerCase() === "yes" ? "yes" : "",
+      Abstract:  row["Abstract"]    || "",
     };
   }).filter(r => r.Day);
 }
