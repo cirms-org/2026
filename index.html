@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CIRMS 2026 — Annual Meeting</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -52,8 +52,8 @@
     main {
       flex: 1;
       display: flex;
-      align-items: flex-start;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
       padding: 2.5rem 1.5rem 4rem;
     }
 
@@ -179,6 +179,36 @@
 
     .site-footer a:hover { text-decoration: underline; }
 
+    /* ── QR code ──────────────────────────────────────────────── */
+
+    .qr-section {
+      text-align: center;
+      padding: 5rem 1rem 1rem;
+    }
+
+    .qr-wrap {
+      display: inline-block;
+      background: #fff;
+      border-radius: 10px;
+      padding: 1.2rem 1.2rem 0.8rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+    }
+
+    .qr-wrap img {
+      display: block;
+      width: 240px;
+      height: 240px;
+    }
+
+    .qr-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      font-family: 'DM Mono', 'DM Sans', monospace;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      margin-top: 0.5rem;
+    }
+
     /* ── Responsive ──────────────────────────────────────────── */
 
     @media (max-width: 480px) {
@@ -257,11 +287,15 @@
       </a>
 
     </div>
-  </main>
 
-  <footer class="site-footer">
-    <a href="https://cirms.org" target="_blank" rel="noopener">cirms.org</a>
-  </footer>
+    <div class="qr-section">
+      <div class="qr-wrap">
+        <img src="assets/cirsm-2026-qr.svg"/>
+        <div class="qr-label"><a href="https://cirms-org.github.io/2026">cirms-org.github.io/2026</a></div>
+      </div>
+    </div>
+
+  </main>
 
 </body>
 </html>
