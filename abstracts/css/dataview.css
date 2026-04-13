@@ -2,7 +2,9 @@
 
 body {
     padding: 20px;
-    background-color: #f8f9fa;
+    background-color: #e2e8f5;
+    font-family: 'DM Sans', sans-serif;
+    color: #1e293b;
 }
 
 .empty-state {
@@ -24,29 +26,33 @@ body {
 .table-container {
     background: white;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+
+.header {
+    background: #001f4f;
 }
 
 .tabulator .tabulator-header {
-    background-color: #1e3a5f;
+    background-color: #001f4f;
     color: white;
-    border-bottom: 2px solid #3b6fd4;
+    border-bottom: 2px solid #1e3a5f;
 }
 
 .tabulator .tabulator-header .tabulator-col {
-    background-color: #1e3a5f;
+    background-color: #001f4f;
     color: white;
-    border-right-color: #2d5080;
+    border-right-color: #0a3060;
 }
 
 .tabulator .tabulator-header .tabulator-col.tabulator-sortable:hover {
-    background-color: #2d5080 !important;
+    background-color: #0a3060 !important;
 }
 
 .tabulator .tabulator-header-filter input {
     background-color: white !important;
     color: #333 !important;
-    border: 1px solid #3b6fd4;
+    border: 1px solid #1e3a5f;
     border-radius: 3px;
 }
 
@@ -68,8 +74,23 @@ body {
 }
 
 .header {
-    padding: 30px;
+    padding: 1rem 2rem 1.4rem;
     margin-bottom: 20px;
+    background: #001f4f;
+    color: #fff;
+}
+
+.header h1 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    margin: 0;
+    color: #fff;
+}
+
+.header .text-muted {
+    color: #94a3b8 !important;
+    font-size: 1rem;
 }
 
 .table-container {
@@ -134,19 +155,23 @@ body {
 }
 
 #data-sets .btn {
-    background-color: white;
-    color: rgba(0, 0, 0, 0.6);
-    border-color: rgba(0, 0, 0, 0.6);
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    border: 1.5px solid rgba(255,255,255,0.35);
+    font-weight: 500;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    transition: background 0.15s, border-color 0.15s;
 }
 
 #data-sets .btn.active {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(255,255,255,0.25);
     color: white;
-    border-color: rgba(0, 0, 0, 0.6);
+    border-color: rgba(255,255,255,0.6);
 }
 
 #data-sets .btn:hover {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(255,255,255,0.2);
     color: white;
-    border-color: rgba(0, 0, 0, 0.6);
+    border-color: rgba(255,255,255,0.6);
 }
