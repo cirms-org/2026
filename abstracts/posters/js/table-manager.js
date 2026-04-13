@@ -58,6 +58,12 @@ const TableManager = {
 
         // Hide loading, show table
         document.getElementById('empty-state').style.display = 'none';
+
+        // Open row url (in csv field "url") in row click
+        this.table.on("rowClick", (e, row) => {
+            const url = row.getData().url;
+            if (url) window.open(url, '_blank');
+        });
     },
 
     /**
