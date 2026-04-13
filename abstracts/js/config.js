@@ -11,8 +11,8 @@ const config = {
 
     // Data sets
     dataSets: [
-        { label: 'Presentations',       config: 'js/config-presentations.js' },
         { label: 'Posters and Essays',  config: 'js/config-posters.js' },
+        { label: 'Presentations',       config: 'js/config-presentations.js' },
     ],
 
     // Load and download visibility options
