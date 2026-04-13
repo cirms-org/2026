@@ -1,4 +1,4 @@
-﻿Day,Track,Time,Duration,Title,Speaker,Affiliation,Highlight,Abstract
+﻿Day,Track,Time,Duration,Title,Speaker,Affiliation,Highlight,Url
 Mon,Break,8:00,0:15,Registration,,,,
 Mon,Break,8:15,0:45,Breakfast,,,,
 Mon,Plen,9:00,0:15,President's Welcome,Cody Wilson,IBA Industrial,,
@@ -6,39 +6,39 @@ Mon,Plen,9:15,0:15,Introduction to Needs Report,Shaheen Dewji,Georgia Institute 
 Mon,Plen,9:30,0:15,Introduction to NIST,Alan K. Thompson,NIST,,
 Mon,Plen,9:45,0:30,Keynote: Perspective from the Hill,Ariel Marshall,Scale AI,,
 Mon,Break,10:15,0:15,Health break,,,,
-Mon,Plen,10:30,0:30,"Plenary 1: Cobalt-60 and Gamma applications: Effective, understood, growing, and sustainable",Richard Weins,Nordion,,weins
-Mon,Plen,11:00,0:30,Plenary 2: Heat you can measure: Verification and standards for clinical hyperthermia,Dario Rodrigues,University of Maryland Medical Center,,rodrigues
+Mon,Plen,10:30,0:30,"Plenary 1: Cobalt-60 and Gamma applications: Effective, understood, growing, and sustainable",Richard Weins,Nordion,,/2026/abstracts/presentations/abstract-weins.pdf
+Mon,Plen,11:00,0:30,Plenary 2: Heat you can measure: Verification and standards for clinical hyperthermia,Dario Rodrigues,University of Maryland Medical Center,,/2026/abstracts/presentations/abstract-rodrigues.pdf
 Mon,Plen,11:30,0:30,Poster blitz 1,,,yes,
 Mon,Plen,12:00,0:30,Poster viewing session,,,yes,
 Mon,Break,12:30,1:00,Lunch — Caswell lunch,,,,
 Mon,RPHS-RPME,13:30,0:10,Session 1: Radiation Applications (Main Ballroom),Ileana Pazos,,,
-Mon,RPHS-RPME,13:40,0:20,Dose uniformity ratio changes due to device movement in radiation sterilization,Tobias Funk,Triple Ring Technologies,,funk
-Mon,RPHS-RPME,14:00,0:20,Phytosanitary irradiation in international trade,Emilia Bustos,North Carolina State University,,bustos
-Mon,RPHS-RPME,14:20,0:20,The effect of e-beam irradiation direction on product dose uniformity and dosimeter response,Ayeh Jowzaee,STERIS,,jowzaee
-Mon,RPHS-RPME,14:40,0:20,A modern evaluation of maximum dose limitations in radiation processing,Mike Christofaro,Reveam,,christofaro
+Mon,RPHS-RPME,13:40,0:20,Dose uniformity ratio changes due to device movement in radiation sterilization,Tobias Funk,Triple Ring Technologies,,/2026/abstracts/presentations/abstract-funk.pdf
+Mon,RPHS-RPME,14:00,0:20,Phytosanitary irradiation in international trade,Emilia Bustos,North Carolina State University,,/2026/abstracts/presentations/abstract-bustos.pdf
+Mon,RPHS-RPME,14:20,0:20,The effect of e-beam irradiation direction on product dose uniformity and dosimeter response,Ayeh Jowzaee,STERIS,,/2026/abstracts/presentations/abstract-jowzaee.pdf
+Mon,RPHS-RPME,14:40,0:20,A modern evaluation of maximum dose limitations in radiation processing,Mike Christofaro,Reveam,,/2026/abstracts/presentations/abstract-christofaro.pdf
 Mon,MApp,13:30,0:10,Session 1: Neutron Dosimetry (Room 2062 on 2nd floor),"Sergio Morato Rafet, Tom Winters, and Matthew Mille",,,
 Mon,MApp,13:40,0:20,"Radiation safety considerations for electron and proton FLASH vaults: shielding, neutron production, and neutron activation",Yannick Poirier,University of Maryland School of Medicine,,
-Mon,MApp,14:00,0:20,Revisiting deterministic neutron RBEs: Insights from urban nuclear detonation scenario analyses and their implications in other exposure settings,Daniela Stricklin,CDC,,stricklin
-Mon,MApp,14:20,0:20,Neutron calibrations: Dosimetry and personnel protection,Daniel Jardin,NIST,,jardin
-Mon,MApp,14:40,0:20,Neutron dosimetry in Intensity-Modulated Neutron Therapy (IMNT) cancer treatment,Adrienne Lehnert,University of Washington,,lehnert
+Mon,MApp,14:00,0:20,Revisiting deterministic neutron RBEs: Insights from urban nuclear detonation scenario analyses and their implications in other exposure settings,Daniela Stricklin,CDC,,/2026/abstracts/presentations/abstract-stricklin.pdf
+Mon,MApp,14:20,0:20,Neutron calibrations: Dosimetry and personnel protection,Daniel Jardin,NIST,,/2026/abstracts/presentations/abstract-jardin.pdf
+Mon,MApp,14:40,0:20,Neutron dosimetry in Intensity-Modulated Neutron Therapy (IMNT) cancer treatment,Adrienne Lehnert,University of Washington,,/2026/abstracts/presentations/abstract-lehnert.pdf
 Mon,Break,15:00,0:30,Health Break,,,,
 Mon,MApp-RPME,15:30,0:10,Session 2: Flash Radiotherapy (Main Ballroom),"Wes Culberson, Matthew Mille, Spencer Mickum",,,
-Mon,MApp-RPME,15:40,0:20,Creating an ultra-thin parallel plate ionization chamber for Flash dosimetry,Shannon Holmes,Standard Imaging,,holmes
-Mon,MApp-RPME,16:00,0:20,A complementary multidetector dosimetry system for the traceable characterization of a novel UHDR electron beam,Malcolm McEwen,National Research Council Canada,,mcewen
-Mon,MApp-RPME,16:20,0:20,"Design, optimization, and characterization of a MLSIC device for proton FLASH-RT QA in a synchrocyclotron and an isochronous cyclotron",Tiezhi Zhang,TetraImaging LLC,,zhang
+Mon,MApp-RPME,15:40,0:20,Creating an ultra-thin parallel plate ionization chamber for Flash dosimetry,Shannon Holmes,Standard Imaging,,/2026/abstracts/presentations/abstract-holmes.pdf
+Mon,MApp-RPME,16:00,0:20,A complementary multidetector dosimetry system for the traceable characterization of a novel UHDR electron beam,Malcolm McEwen,National Research Council Canada,,/2026/abstracts/presentations/abstract-mcewen.pdf
+Mon,MApp-RPME,16:20,0:20,"Design, optimization, and characterization of a MLSIC device for proton FLASH-RT QA in a synchrocyclotron and an isochronous cyclotron",Tiezhi Zhang,TetraImaging LLC,,/2026/abstracts/presentations/abstract-zhang.pdf
 Mon,MApp-RPME,16:40,0:20,Needs,,,,
 Mon,RPHS,15:30,0:10,Session 2: Radiation Measurement & Consequence Management (Room 2062 on 2nd floor),Emmanuel Mate-Kole and Sara Dumit,,,
-Mon,RPHS,15:40,0:20,"Modeling plutonium decorporation in female nuclear worker treated with Ca-DTPA",Sara Dumit,LANL,,dumit
+Mon,RPHS,15:40,0:20,"Modeling plutonium decorporation in female nuclear worker treated with Ca-DTPA",Sara Dumit,LANL,,/2026/abstracts/presentations/abstract-dumit.pdf
 Mon,RPHS,16:00,0:20,"Debunking myths and urban legends in ionizing radiation dosimetry",Chris Passmore,Radiation Detection Company,,
-Mon,RPHS,16:20,0:20,"A new online computer program for neutron activation analysis",Rui Fang,"University of Nevada, Las Vegas",,fang
-Mon,RPHS,16:40,0:20,"BBT-059, a PEGylated Interleukin-11 analog, confers radioprotection against low- and high-LET radiation",Venkateshwara Dronamraju,Henry M Jackson Foundation for the Advancement of Military Medicine,,dronamraju
+Mon,RPHS,16:20,0:20,"A new online computer program for neutron activation analysis",Rui Fang,"University of Nevada, Las Vegas",,/2026/abstracts/presentations/abstract-fang.pdf
+Mon,RPHS,16:40,0:20,"BBT-059, a PEGylated Interleukin-11 analog, confers radioprotection against low- and high-LET radiation",Venkateshwara Dronamraju,Henry M Jackson Foundation for the Advancement of Military Medicine,,/2026/abstracts/presentations/abstract-dronamraju.pdf
 Mon,Break,17:00,,Adjourn,,,,
 Tue,Break,8:00,1:00,Breakfast,,,,
 Tue,Plen,9:00,0:10,President's Welcome,Cody Wilson,IBA Industrial,,
 Tue,Plen,9:10,0:30,Keynote: Commonwealth fusion systems ,Andrea Saltos,CFS,yes,
-Tue,Plen,9:40,0:30,Plenary 3: Investigating the FLASH effect with Monte Carlo simulations,Jan Schuemann,Massachusetts General Hospital and Harvard Medical School,,schuemann
+Tue,Plen,9:40,0:30,Plenary 3: Investigating the FLASH effect with Monte Carlo simulations,Jan Schuemann,Massachusetts General Hospital and Harvard Medical School,,/2026/abstracts/presentations/abstract-schuemann.pdf
 Tue,Break,10:10,0:20,Health break,,,,
-Tue,Plen,10:30,0:30,Plenary 4: Innovative dosimetry and safe nuclear waste management: Building trust through science and precision,Robert Hayes,North Carolina State University,,hayes
+Tue,Plen,10:30,0:30,Plenary 4: Innovative dosimetry and safe nuclear waste management: Building trust through science and precision,Robert Hayes,North Carolina State University,,/2026/abstracts/presentations/abstract-hayes.pdf
 Tue,Plen,11:00,0:20,Marshall R. Cleland Award and Radiation Technology Essay Award,John Logar,Johnson & Johnson,yes,
 Tue,Plen,11:20,0:20,Scientific Exchange Discussion,John Logar,Johnson & Johnson,,
 Tue,Plen,11:40,0:30,Randall S. Caswell Award,Mark Driscoll,SUNY,yes,
@@ -50,12 +50,12 @@ Tue,Break,15:10,0:20,Health Break,,,,
 Tue,RPHS-MApp,15:30,0:10,Session 3: OSL Dosimetry Alternatives (Main Ballroom),Wes Culberson,,,
 Tue,RPHS-MApp,15:40,0:20,Needs,,,,
 Tue,RPHS-MApp,16:00,0:20,MOSFETs,Yushi Chang,University of Maryland,,
-Tue,RPHS-MApp,16:20,0:20,Toward in vivo dosimetry with plastic scintillation detectors,Louis Archambault,University Laval,,archambault
-Tue,RPHS-MApp,16:40,0:20,Using TLDs for In-vivo radiotherapy dose verification,Cliff Hammer,University of Wisconsin – Madison,,hammer
+Tue,RPHS-MApp,16:20,0:20,Toward in vivo dosimetry with plastic scintillation detectors,Louis Archambault,University Laval,,/2026/abstracts/presentations/abstract-archambault.pdf
+Tue,RPHS-MApp,16:40,0:20,Using TLDs for In-vivo radiotherapy dose verification,Cliff Hammer,University of Wisconsin – Madison,,/2026/abstracts/presentations/abstract-hammer.pdf
 Tue,RPME,15:30,0:10,Session 3: Radiation Modality Comparisons (Room 3032 on 3rd floor),Spencer Mickum,,,
-Tue,RPME,15:40,0:20,"Latest efforts of an international collaborative team studying differences in effects for gamma, e-beam and x-ray irradiation applications",Leo Fifield,PNNL,,fifield
-Tue,RPME,16:00,0:20,Performance of X-ray vs. gamma irradiators,Joshua Nuzzi,IBA Industrial,,nuzzi
-Tue,RPME,16:20,0:20,Investigating the use of alanine-based chip cards for emergency personal dosimetry following ionizing radiation exposures,Joel Beazley,University of Oxford,,beazley
+Tue,RPME,15:40,0:20,"Latest efforts of an international collaborative team studying differences in effects for gamma, e-beam and x-ray irradiation applications",Leo Fifield,PNNL,,/2026/abstracts/presentations/abstract-fifield.pdf
+Tue,RPME,16:00,0:20,Performance of X-ray vs. gamma irradiators,Joshua Nuzzi,IBA Industrial,,/2026/abstracts/presentations/abstract-nuzzi.pdf
+Tue,RPME,16:20,0:20,Investigating the use of alanine-based chip cards for emergency personal dosimetry following ionizing radiation exposures,Joel Beazley,University of Oxford,,/2026/abstracts/presentations/abstract-beazley.pdf
 Tue,RPME,16:40,0:20,Perspective on Cesium-137 Supply,Zach Hope,Hopewell Designs,,
 Tue,Plen,17:00,1:00,CIRMS reception,,,yes,
 Tue,Break,18:00,,Adjourn,,,,
@@ -65,10 +65,10 @@ Wed,Plen,9:00,0:15,President's Welcome,Cody Wilson,IBA Industrial,,
 Wed,Plen,9:15,0:30,Randall S. Caswell Award,Nolan Hertel,Georgia Institute of Technology,yes,
 Wed,Plen,9:45,0:30,Group Photo,,,yes,
 Wed,Break,10:15,0:15,Health break,,,,
-Wed,Plen,10:30,0:15,Plenary 5: From hydroxyl radicals to clustered DNA lesions: Integrating track-structure physics with quantitative radiation damage measurements,Amitava Adhikary,University of Iowa,,adhikary
-Wed,Plen,10:45,0:25,Plenary 6:  Impact of the pioneering work of Miral Dizdaroglu in identifying and quantifying DNA base damage on the advancements in understanding the radiation chemistry of DNA,Steven Swarts,University of Florida,,swarts
-Wed,Plen,11:10,0:25,Plenary 7: Biodosimetry at NIST: A tribute to Miral Dizdaroglu,Joey Robertson,NIST,,robertson
-Wed,Plen,11:35,0:15,Plenary 8: Development of METREPOL-based triage algorithms for estimating H-ARS severity and radiation dose in a baboon mixed-field radiation model,David L. Bolduc,AFRRI,,bolduc
+Wed,Plen,10:30,0:15,Plenary 5: From hydroxyl radicals to clustered DNA lesions: Integrating track-structure physics with quantitative radiation damage measurements,Amitava Adhikary,University of Iowa,,/2026/abstracts/presentations/abstract-adhikary.pdf
+Wed,Plen,10:45,0:25,Plenary 6:  Impact of the pioneering work of Miral Dizdaroglu in identifying and quantifying DNA base damage on the advancements in understanding the radiation chemistry of DNA,Steven Swarts,University of Florida,,/2026/abstracts/presentations/abstract-swarts.pdf
+Wed,Plen,11:10,0:25,Plenary 7: Biodosimetry at NIST: A tribute to Miral Dizdaroglu,Joey Robertson,NIST,,/2026/abstracts/presentations/abstract-robertson.pdf
+Wed,Plen,11:35,0:15,Plenary 8: Development of METREPOL-based triage algorithms for estimating H-ARS severity and radiation dose in a baboon mixed-field radiation model,David L. Bolduc,AFRRI,,/2026/abstracts/presentations/abstract-bolduc.pdf
 Wed,Plen,11:50,0:30,What's a CIRMS for?,Malcolm McEwen,National Research Council Canada,yes,
 Wed,Plen,12:20,0:15,Needs Report,Shaheen Dewji,Georgia Institute of Technology,,
 Wed,Plen,12:35,0:10,President's closing remarks and farewell,Cody Wilson,IBA Industrial,,
