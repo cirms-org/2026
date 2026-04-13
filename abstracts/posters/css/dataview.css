@@ -1,0 +1,134 @@
+/* Main Layout */
+
+body {
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6c757d;
+    font-size: 15px;
+    letter-spacing: 0.03em;
+}
+
+.container-fluid {
+    max-width: 2000px;
+    margin: 0 auto;
+}
+
+/* Tabulator styles */
+
+.header,
+.table-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.tabulator .tabulator-header {
+    background-color: #1e3a5f;
+    color: white;
+    border-bottom: 2px solid #3b6fd4;
+}
+
+.tabulator .tabulator-header .tabulator-col {
+    background-color: #1e3a5f;
+    color: white;
+    border-right-color: #2d5080;
+}
+
+.tabulator .tabulator-header .tabulator-col.tabulator-sortable:hover {
+    background-color: #2d5080 !important;
+}
+
+.tabulator .tabulator-header-filter input {
+    background-color: white !important;
+    color: #333 !important;
+    border: 1px solid #3b6fd4;
+    border-radius: 3px;
+}
+
+.tabulator .tabulator-footer {
+    background-color: white !important;
+    border-top: 1px solid #dee2e6;
+}
+
+.tabulator .tabulator-arrow {
+    border-bottom-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.tabulator .tabulator-col.tabulator-sortable[aria-sort=ascending] .tabulator-arrow {
+    border-bottom-color: white !important;
+}
+
+.tabulator .tabulator-header .tabulator-col.tabulator-sortable[aria-sort=descending] .tabulator-col-content .tabulator-col-sorter .tabulator-arrow {
+    border-top-color: white !important;
+}
+
+.header {
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
+.table-container {
+    padding: 20px;
+}
+
+#data-table {
+    font-size: 14px;
+}
+
+/* Controls */
+
+.controls {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.stats {
+    color: #6c757d;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.badge-custom {
+    font-size: 12px;
+    padding: 5px 10px;
+}
+
+/* Button Styles — outline by default, solid on hover.
+   Each .btn-* class only needs to set --btn-color. */
+.controls .btn {
+    background-color: var(--btn-color, #6c757d);
+    color: white;
+    border: 1px solid var(--btn-color, #6c757d);
+    transition: filter 0.15s;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.controls .btn:hover {
+    filter: brightness(1.2);
+    color: white;
+    border-color: var(--btn-color, #6c757d);
+}
+
+.btn-file  { --btn-color: #333333; }
+.btn-csv   { --btn-color: #3b6fd4; }
+.btn-xlsx  { --btn-color: #2e9e57; }
+.btn-pdf   { --btn-color: #d93232; }
+.btn-json  { --btn-color: #6d28d9; }
+.btn-yaml  { --btn-color: #d97706; }
+.btn-clear { --btn-color: #6c757d; }
+
+/* Override style for clear filters button */
+.controls .btn-clear {
+    background-color: white !important;
+    color: #6c757d !important;
+    border: 1px solid #6c757d !important;
+}
