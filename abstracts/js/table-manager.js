@@ -18,13 +18,13 @@ const TableManager = {
             ? config.visibleColumns.filter(h => headers.includes(h))
             : headers;
 
-        // Generate column definitions dynamically
-        const columns = orderedHeaders.map((header, index) => ({
+        // Enable config override of column widths
+        const columns = orderedHeaders.map(header => ({
             title: header,
             field: header,
             sorter: "auto",
             headerFilter: config.nonFilterableColumns.includes(header) ? false : "input",
-            width: index === 0 ? 160 : undefined,
+            widthGrow: config.columnWidthOverrides?.[header] ?? 1,
             tooltip: true,
         }));
 
@@ -33,7 +33,6 @@ const TableManager = {
             data: data,
             columns: columns,
             layout: "fitColumns",
-            columnDefaults: { widthGrow: 1 },
             responsiveLayout: false,
             pagination: true,
             paginationSize: config.paginationSize,
@@ -61,7 +60,7 @@ const TableManager = {
 
         // Open row url (in csv field "url") in row click
         this.table.on("rowClick", (e, row) => {
-            const url = row.getData().url;
+            const url = row.getData().Url;
             if (url) window.open(url, '_blank');
         });
     },

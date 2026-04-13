@@ -6,8 +6,14 @@
 const config = {
 
     // Page header
-    title: 'CIRMS 2026 — Posters and Essays',
+    title: 'CIRMS 2026 — Abstracts',
     subtitle: 'Annual Meeting  ·  April 13–15, 2026',
+
+    // Data sets
+    dataSets: [
+        { label: 'Presentations',       config: 'js/config-presentations.js' },
+        { label: 'Posters and Essays',  config: 'js/config-posters.js' },
+    ],
 
     // Load and download visibility options
     showLoadButton: false,
@@ -19,11 +25,11 @@ const config = {
 
     // Optional: define which columns to show and in what order.
     // Leave as empty array [] to show all columns in their natural order.
-    visibleColumns: ['Type', 'Authors', 'Affiliation', 'Title'],
+    visibleColumns: ['Authors', 'Affiliation', 'Title', "Type"],
 
     // Records with empty values in any of these fields will be hidden.
     // Leave as empty array [] to show all records.
-    requiredFields: [],
+    requiredFields: ['Url'],
 
     // Optional: Set columns that should not be filterable
     nonFilterableColumns: [],
