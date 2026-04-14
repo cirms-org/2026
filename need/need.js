@@ -145,7 +145,7 @@ function renderSlide() {
   const segments = [
     { text: 'Progress in ',                            highlight: false },
     { text: area       || BLANK, isBlank: !area,       highlight: true  },
-    { text: ' is currently blocked because we lack ',  highlight: false },
+    { text: ' is currently limited because we lack ',  highlight: false },
     { text: standard   || BLANK, isBlank: !standard,   highlight: true  },
     { text: ', which prevents ',                       highlight: false },
     { text: capability || BLANK, isBlank: !capability, highlight: true  },
